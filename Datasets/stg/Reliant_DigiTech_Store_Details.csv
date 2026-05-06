@@ -1,0 +1,11 @@
+﻿store_id,store_name,city,state,store_type,open_year,store_area_sqft
+1,Reliant DigiTech Hyderabad Mall,Hyderabad,TS,Mall,2019,12000
+2,Reliant DigiTech Bangalore High Street,Bangalore,KA,HighStreet,2018,9000
+3,Reliant DigiTech Mumbai Mall,Mumbai,MH,Mall,2020,15000
+4,Reliant DigiTech Delhi Mall,Delhi,DL,Mall,2017,14000
+5,Reliant DigiTech Chennai High Street,Chennai,TN,HighStreet,2019,10000
+6,Reliant DigiTech Pune Mall,Pune,MH,Mall,2021,13000
+7,Reliant DigiTech Kolkata High Street,Kolkata,WB,HighStreet,2020,9500
+8,Reliant DigiTech Hyderabad Tech Park,Hyderabad,TS,TechPark,2022,8000
+9,Reliant DigiTech Mumbai Tech Park,Mumbai,MH,TechPark,2021,8500
+10,Reliant DigiTech Delhi Tech Park,Delhi,DL,TechPark,2022,9000
