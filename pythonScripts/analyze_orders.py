@@ -4,7 +4,8 @@ import glob
 import matplotlib.pyplot as plt
 from datetime import datetime, date, timedelta
 
-datasets_folder = os.path.join(os.path.dirname(__file__), '...', 'Datasets', 'stg')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
+charts_folder = os.path.join(os.path.dirname(__file__), '..', 'charts')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))
@@ -16,9 +17,11 @@ def find_file(pattern):
 # Step 1: Read the files
 # ================================================================
 
-orders  = pd.read_csv(find_file('orders_*.csv'))
+orders  = pd.read_csv(find_file('Reliant_DigiTech_Orders_Final_100k.csv'))
 products = pd.read_csv(find_file('products_*.csv'))
-stores  = pd.read_parquet(find_file('store_details_*.parquet'))
+stores  = pd.read_csv(find_file('Reliant_DigiTech_Store_Details.csv'))
+
+orders['order_date'] = pd.to_datetime(orders['order_date'], dayfirst=True)
 
 print("Step 1: Files loaded successfully!")
 print("Orders   :", len(orders), "rows")
@@ -105,7 +108,8 @@ def monthly_revenue_trend():
     print("\n--- Monthly Revenue Trend ---")
 
     # Convert order date to datetime so we can extract month and year
-    orders['order_date'] = pd.to_datetime(orders['order_date'])
+    orders['order_date'] = pd.to_datetime(orders['order_date'], dayfirst=True)
+    orders['month'] = orders['order_date'].dt.to_period('M')
 
     monthly = orders.groupby('month')['revenue'].sum().sort_index()
 
@@ -140,7 +144,9 @@ def datetime_scenarios():
     print("=" * 60)
 
     # Convert order_date to datetime so we can do date calculations
-    orders['order_date'] = pd.to_datetime(orders['order_date'])
+    orders['order_date'] = pd.to_datetime(orders['order_date'], dayfirst=True)
+    year_orders = orders.copy()
+    year_orders['year_month'] = year_orders['order_date'].dt.to_period('M')
 
     # ---------------------------------------------------
     # Scenario 1: Today's date and data range
@@ -196,7 +202,7 @@ def datetime_scenarios():
     best_month_rev = monthly_revenue.max()
 
     # strftime formats the datetime into a readable string
-    print("\n Year : {year}")
+    print(f"\n Year : {year}")
     print(f" Best Day   -> {best_day.strftime('%d %B %Y')} ({best_day.strftime('%A')})    | Revenue: Rs. {best_day_rev:,}")
     print(f" Best Month -> {best_month.strftime('%B %Y')}          | Revenue: Rs. {best_month_rev:,}")
 
@@ -212,9 +218,11 @@ def datetime_scenarios():
 # plt.show()   -> displays all charts
 
 def show_charts():
-    orders['order_date'] = pd.to_datetime(orders['order_date'])
+    orders['order_date'] = pd.to_datetime(orders['order_date'], dayfirst=True)
     orders_with_products = orders.merge(products[['product_id', 'product_name', 'category', 'brand']], on='product_id', how='left')
     orders_with_store    = orders.merge(stores[['store_id', 'store_name', 'store_type']], on='store_id', how='left')
+
+    os.makedirs(charts_folder, exist_ok=True)
 
     # ---- Chart 1: Bar chart - Revenue by Category ----
     cat_revenue = orders_with_products.groupby('category')['revenue'].sum().sort_values(ascending=False)
@@ -226,7 +234,7 @@ def show_charts():
     plt.ylabel('Revenue (Rs.)')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
-    plt.savefig(os.path.join(os.path.dirname(__file__), '...', 'charts', 'revenue_by_category.png'))
+    plt.savefig(os.path.join(charts_folder, 'revenue_by_category.png'))
     print("Chart saved: charts/revenue_by_category.png")
 
     # ---- Chart 2: Pie chart - Revenue share by Store Type ----
@@ -236,7 +244,7 @@ def show_charts():
     plt.pie(type_revenue.values, labels=type_revenue.index, autopct='%1.1f%%', startangle=140)
     plt.title('Revenue Share by Store Type')
     plt.tight_layout()
-    plt.savefig(os.path.join(os.path.dirname(__file__), '...', 'charts', 'revenue_by_store_type.png'))
+    plt.savefig(os.path.join(charts_folder, 'revenue_by_store_type.png'))
     print("Chart saved: charts/revenue_by_store_type.png")
 
     # ---- Chart 3: Bar chart - Revenue by Store ----
@@ -250,7 +258,7 @@ def show_charts():
     plt.ylabel('Revenue (Rs.)')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
-    plt.savefig(os.path.join(os.path.dirname(__file__), '...', 'charts', 'revenue_by_store.png'))
+    plt.savefig(os.path.join(charts_folder, 'revenue_by_store.png'))
     print("Chart saved: charts/revenue_by_store.png")
 
     # ---- Chart 4: Line chart - Monthly Revenue Trend ----
@@ -265,7 +273,7 @@ def show_charts():
     plt.ylabel('Revenue (Rs.)')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
-    plt.savefig(os.path.join(os.path.dirname(__file__), '...', 'charts', 'monthly_revenue_trend.png'))
+    plt.savefig(os.path.join(charts_folder, 'monthly_revenue_trend.png'))
     print("Chart saved: charts/monthly_revenue_trend.png")
 
     plt.show()

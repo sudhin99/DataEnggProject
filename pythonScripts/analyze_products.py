@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import glob
 
-datasets_folder = os.path.join(os.path.dirname(__file__), '...', 'Datasets', 'stg')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))
@@ -11,7 +11,9 @@ def find_file(pattern):
     return matches[-1]
 
 # pd.read_csv() reads a CSV file and stores it as a DataFrame (like a table)
-df = pd.read_csv(find_file('products_*.csv'))
+file_path = find_file('products_*.csv')
+df = pd.read_csv(file_path)
+print(f"Step 1: File loaded successfully! ({os.path.basename(file_path)})")
 
 # Calculate profit margin % column once - used across all functions
 # margin % = (selling price - purchase price) / purchase price * 100

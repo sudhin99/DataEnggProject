@@ -1,8 +1,8 @@
-import pandas as pd
+ import pandas as pd
 import os
 import glob
 
-datasets_folder = os.path.join(os.path.dirname(__file__), '...', 'Datasets', 'stg')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))
@@ -13,11 +13,12 @@ def find_file(pattern):
 # ================================================================
 # Step 1: Read the file
 # ================================================================
-# store_details is a Parquet file, so we use read_parquet()
+# store details are available as CSV in the Datasets/stg folder
 
-df = pd.read_parquet(find_file('store_details_*.parquet'))
+file_path = find_file('Reliant_DigiTech_Store_Details.csv')
+df = pd.read_csv(file_path)
 
-print("Step 1: File loaded successfully!")
+print(f"Step 1: File loaded successfully! ({os.path.basename(file_path)})")
 print("Total rows   :", len(df))
 print("Total columns:", len(df.columns))
 print("Column names :", list(df.columns))
