@@ -16,6 +16,8 @@ pip --version
 Navigate to the project root and create a virtual environment:
 
 ```powershell
+Go to current project path in powershell - 
+##<cd c:\Users\<username>\<folder_path> > Sample Below -
 cd C:\Users\sudhin.kundu\Documents\DataEnggProject
 python -m venv venv
 ```
@@ -27,9 +29,7 @@ python -m venv venv
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
-
 You should see `(venv)` prefixed in your terminal prompt after activation.
-
 > **Note:** If you get a script execution error, run this first:
 > ```powershell
 > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser

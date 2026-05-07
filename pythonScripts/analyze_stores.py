@@ -1,4 +1,4 @@
- import pandas as pd
+import pandas as pd
 import os
 import glob
 
@@ -13,10 +13,10 @@ def find_file(pattern):
 # ================================================================
 # Step 1: Read the file
 # ================================================================
-# store details are available as CSV in the Datasets/stg folder
+# store details are available as parquet files in the Datasets/stg folder
 
-file_path = find_file('Reliant_DigiTech_Store_Details.csv')
-df = pd.read_csv(file_path)
+file_path = find_file('store_details_*.parquet')
+df = pd.read_parquet(file_path)
 
 print(f"Step 1: File loaded successfully! ({os.path.basename(file_path)})")
 print("Total rows   :", len(df))

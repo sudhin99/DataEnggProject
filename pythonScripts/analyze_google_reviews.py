@@ -50,15 +50,10 @@ print(df.head(10).to_string(index=False))
 # Step 4: Sentiment Analysis – add a new column
 # ===================================================
 # TextBlob gives a polarity score for each review text
-# we use .empty() to run the function on every row
-def get_sentiment(text):
-    score = TextBlob(text).sentiment.polarity
-    if score > 0.2:
-        return "Positive"
-    elif score < -0.8:
-        return "Negative"
-    else:
-        return "Neutral"
+# we use .apply() to run the function on every row
+# lambda scores each review text and maps polarity to a sentiment level
+
+get_sentiment = lambda text: 'Positive' if TextBlob(text).sentiment.polarity > 0.2 else 'Negative' if TextBlob(text).sentiment.polarity < -0.2 else 'Neutral'
 
 df['sentiment'] = df['text'].apply(get_sentiment)
 

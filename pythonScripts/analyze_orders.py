@@ -17,9 +17,9 @@ def find_file(pattern):
 # Step 1: Read the files
 # ================================================================
 
-orders  = pd.read_csv(find_file('Reliant_DigiTech_Orders_Final_100k.csv'))
+orders  = pd.read_csv(find_file('orders_*.csv'))
 products = pd.read_csv(find_file('products_*.csv'))
-stores  = pd.read_csv(find_file('Reliant_DigiTech_Store_Details.csv'))
+stores  = pd.read_parquet(find_file('store_details_*.parquet'))
 
 orders['order_date'] = pd.to_datetime(orders['order_date'], dayfirst=True)
 
@@ -49,6 +49,11 @@ def show_basic_stats():
     print("Total Quantity Sold    :", orders['quantity'].sum())
     print("Date Range             :", orders['order_date'].min(), "to", orders['order_date'].max())
 
+    # lambda classifies orders into High, Medium, Low based on revenue
+    revenue_band = lambda x: 'High' if x >= 50000 else 'Mid' if x >= 10000 else 'Low'
+    orders['revenue_band'] = orders['revenue'].apply(revenue_band)
+    print("\nRevenue Band Distribution:")
+    print(orders['revenue_band'].value_counts().to_string())
 # ================================================================
 # Step 4: Revenue by store
 # ================================================================

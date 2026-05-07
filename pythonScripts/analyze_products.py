@@ -16,8 +16,8 @@ df = pd.read_csv(file_path)
 print(f"Step 1: File loaded successfully! ({os.path.basename(file_path)})")
 
 # Calculate profit margin % column once - used across all functions
-# margin % = (selling price - purchase price) / purchase price * 100
-df['margin_pct'] = ((df['selling_price'] - df['purchase_price']) / df['purchase_price'] * 100).round(2)
+# margin % = (MRP - purchase price) / purchase price * 100
+df['margin_pct'] = ((df['MRP'] - df['purchase_price']) / df['purchase_price'] * 100).round(2)
 
 print("Step 1: File loaded successfully!")
 print("Total rows   :", len(df))
@@ -52,17 +52,17 @@ def show_products_available():
 def show_costliest_products():
     # df['column'].max() gives the maximum value
     # df[ df['column'] == value ] filters rows matching a condition
-    most_expensive_price = df['selling_price'].max()
-    most_expensive_product = df[ df['selling_price'] == most_expensive_price ]
+    most_expensive_price = df['MRP'].max()
+    most_expensive_product = df[ df['MRP'] == most_expensive_price ]
 
-    print("\n--- Costliest Product Overall (by Selling Price) ---")
-    print(most_expensive_product[['product_name', 'category', 'brand', 'selling_price']])
+    print("\n--- Costliest Product Overall (by MRP) ---")
+    print(most_expensive_product[['product_name', 'category', 'brand', 'MRP']])
 
     print("\n--- Costliest Product in Each Category ---")
     for category in df['category'].unique():
         category_df = df[ df['category'] == category ]
-        max_price = category_df['selling_price'].max()
-        top_product = category_df[ category_df['selling_price'] == max_price ].iloc[0]
+        max_price = category_df['MRP'].max()
+        top_product = category_df[ category_df['MRP'] == max_price ].iloc[0]
         print(f" ({category:<25}) -> {top_product['product_name']} at Rs.{max_price}")
 
 # ================================================================
@@ -71,13 +71,13 @@ def show_costliest_products():
 
 def show_price_summary():
     # mean() / min() / max() give basic statistics
-    print("\n--- Selling Price Summary ---")
-    print("Minimum price :", df['selling_price'].min())
-    print("Maximum price :", df['selling_price'].max())
-    print("Average price :", round(df['selling_price'].mean(), 2))
+    print("\n--- MRP Summary ---")
+    print("Minimum price :", df['MRP'].min())
+    print("Maximum price :", df['MRP'].max())
+    print("Average price :", round(df['MRP'].mean(), 2))
 
-    print("\n--- Average Selling Price by Category ---")
-    avg_by_category = df.groupby('category')['selling_price'].mean().round(2).sort_values(ascending=False)
+    print("\n--- Average MRP by Category ---")
+    avg_by_category = df.groupby('category')['MRP'].mean().round(2).sort_values(ascending=False)
     print(avg_by_category)
 
 # ================================================================
@@ -124,7 +124,7 @@ def category_profit_margin():
 
     print("\n--- Top 5 Products with Highest Profit Margin ---")
     top_margin = df.sort_values('margin_pct', ascending=False).head(5)
-    print(top_margin[['product_name', 'category', 'brand', 'purchase_price', 'selling_price', 'margin_pct']].to_string(index=False))
+    print(top_margin[['product_name', 'category', 'brand', 'purchase_price', 'MRP', 'margin_pct']].to_string(index=False))
 
 # ================================================================
 # Step 7: Warranty info

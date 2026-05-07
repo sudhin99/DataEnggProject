@@ -1,4 +1,4 @@
-import pandas as pd
+﻿import pandas as pd
 import os
 import glob
 
@@ -18,6 +18,8 @@ def find_file(pattern):
 
 inventory = pd.read_csv(find_file('inventory_*.csv'))
 products  = pd.read_csv(find_file('products_*.csv'))
+orders    = pd.read_csv(find_file('orders_*.csv'))
+orders['order_date'] = pd.to_datetime(orders['order_date'], dayfirst=True, errors='coerce')
 
 print("Step 1: Files loaded successfully!")
 print("Inventory rows :", len(inventory))
@@ -100,6 +102,30 @@ def low_stock_alert():
         print(f" {row['product_name']:<40} ({row['category']}) -> {row['closing_stock']} units left")
 
 # ================================================================
+# Step 8: Reconcile March sales with inventory movement
+# ================================================================
+
+def reconcile_march_sales():
+    print("\n--- March 2026 Sales vs Inventory Movement ---")
+
+    march_orders = orders[orders['order_date'].dt.to_period('M') == pd.Period('2026-03')]
+    if march_orders.empty:
+        print("No March 2026 orders found.")
+        return
+
+    total_march_sales = march_orders['quantity'].sum()
+    inventory_movement = (inventory['opening_stock'] - inventory['closing_stock']).sum()
+
+    print(f"March 2026 total sales quantity        : {total_march_sales}")
+    print(f"March inventory movement quantity     : {inventory_movement}")
+
+    if total_march_sales == inventory_movement:
+        print("MATCH: March sales equals inventory movement.")
+    else:
+        print("MISMATCH: March sales does not equal inventory movement.")
+        print(f"Difference: {total_march_sales - inventory_movement}")
+
+# ================================================================
 # Run all steps
 # ================================================================
 
@@ -109,3 +135,4 @@ top_selling_products()
 sales_by_category()
 stock_by_store()
 low_stock_alert()
+reconcile_march_sales()
