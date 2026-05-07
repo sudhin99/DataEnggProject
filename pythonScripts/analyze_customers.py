@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import glob
 import matplotlib.pyplot as plt
+import openpyxl
 
 datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
 
