@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 
 # Setup paths
 base_dir = os.path.dirname(__file__)
-datasets_folder = os.path.join(base_dir, '..', 'Datasets', 'stg')
-charts_folder = os.path.join(base_dir, '..', 'charts')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets', 'stg')
+charts_folder = os.path.join(base_dir, '..','..', 'charts')
 
 def find_file(pattern):
     path_pattern = os.path.join(datasets_folder, pattern)

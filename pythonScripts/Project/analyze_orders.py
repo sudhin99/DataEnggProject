@@ -4,8 +4,8 @@ import glob
 import matplotlib.pyplot as plt
 from datetime import datetime, date, timedelta
 
-datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
-charts_folder = os.path.join(os.path.dirname(__file__), '..', 'charts')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets', 'stg')
+charts_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'charts')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))

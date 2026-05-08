@@ -8,7 +8,7 @@ from textblob import TextBlob
 # Step 1: Read the JSON file
 # ===================================================
 
-datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets', 'stg')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))
