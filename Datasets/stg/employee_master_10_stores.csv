@@ -1,0 +1,131 @@
+emp_id,emp_name,gender,designation,store_id,city,joining_date,salary
+101,Pooja Kundu,Female,Sales Associate,1,Hyderabad,2023-09-07,53460
+102,Pritam Verma,Male,Store Manager,1,Hyderabad,2020-11-03,43099
+103,Deepak Sharma,Male,Cleaning Staff,1,Hyderabad,2020-08-12,70711
+104,Deepak Gupta,Male,Assistant Manager,1,Hyderabad,2021-02-15,22928
+105,Sneha Reddy,Female,Cashier,1,Hyderabad,2021-03-06,82343
+106,Amit Gupta,Male,Cashier,1,Hyderabad,2020-01-27,80431
+107,Sonal Singh,Female,Store Manager,1,Hyderabad,2021-01-30,53662
+108,Amit Iyer,Male,Security,1,Hyderabad,2021-06-26,75243
+109,Ishita Verma,Female,Cashier,1,Hyderabad,2022-09-28,65838
+110,Pooja Sharma,Female,Sales Associate,1,Hyderabad,2022-06-28,60376
+111,Rohan Gupta,Male,Store Manager,1,Hyderabad,2020-07-08,73279
+112,Amit Singh,Male,Security,1,Hyderabad,2020-11-26,22233
+113,Pritam Patil,Male,Cashier,1,Hyderabad,2022-05-06,42065
+114,Sanjay Singh,Male,Store Manager,2,Bangalore,2022-12-06,48117
+115,Deepak Sharma,Male,Technician,2,Bangalore,2020-10-27,32864
+116,Kavya Gupta,Female,Technician,2,Bangalore,2021-02-13,19942
+117,Arjun Das,Male,Cleaning Staff,2,Bangalore,2020-10-10,35209
+118,Megha Nair,Female,Technician,2,Bangalore,2020-11-14,82122
+119,Sonal Nair,Female,Cleaning Staff,2,Bangalore,2021-07-06,50418
+120,Ananya Patil,Female,Store Manager,2,Bangalore,2021-12-05,67143
+121,Deepak Verma,Male,Security,2,Bangalore,2021-05-08,49303
+122,Riya Kundu,Female,Technician,2,Bangalore,2023-05-30,61356
+123,Kiran Sharma,Male,Cashier,2,Bangalore,2022-04-16,73825
+124,Rahul Gupta,Male,Security,2,Bangalore,2022-03-30,25905
+125,Rohan Iyer,Male,Store Manager,2,Bangalore,2021-08-20,38072
+126,Arjun Sharma,Male,Sales Associate,2,Bangalore,2020-04-12,34953
+127,Tanvi Patil,Female,Sales Associate,2,Bangalore,2022-01-20,69305
+128,Pooja Reddy,Female,Sales Associate,2,Bangalore,2022-09-11,51127
+129,Rahul Nair,Male,Store Manager,3,Mumbai,2021-05-13,48626
+130,Pritam Das,Male,Cleaning Staff,3,Mumbai,2024-02-05,36807
+131,Pooja Nair,Female,Technician,3,Mumbai,2022-10-11,44443
+132,Vivek Reddy,Male,Security,3,Mumbai,2022-04-19,81409
+133,Kavya Kundu,Female,Cashier,3,Mumbai,2020-03-30,78502
+134,Tanvi Singh,Female,Store Manager,3,Mumbai,2021-08-27,31148
+135,Sonal Das,Female,Sales Associate,3,Mumbai,2021-10-28,22756
+136,Tanvi Singh,Female,Assistant Manager,3,Mumbai,2020-06-12,77807
+137,Sanjay Nair,Male,Store Manager,3,Mumbai,2023-01-07,60751
+138,Ananya Nair,Female,Cleaning Staff,3,Mumbai,2023-01-12,45190
+139,Deepak Iyer,Male,Assistant Manager,3,Mumbai,2023-11-11,65182
+140,Amit Verma,Male,Assistant Manager,4,Delhi,2020-06-09,44930
+141,Sudhin Verma,Male,Technician,4,Delhi,2023-06-09,63378
+142,Vivek Nair,Male,Security,4,Delhi,2020-05-05,37222
+143,Priya Iyer,Female,Security,4,Delhi,2022-01-24,51715
+144,Kiran Singh,Male,Cleaning Staff,4,Delhi,2022-09-14,25518
+145,Rahul Singh,Male,Cashier,4,Delhi,2023-11-09,59377
+146,Ananya Patil,Female,Technician,4,Delhi,2020-05-04,22532
+147,Rohan Kundu,Male,Security,4,Delhi,2023-11-04,19286
+148,Ananya Nair,Female,Store Manager,4,Delhi,2022-11-06,55054
+149,Tanvi Das,Female,Technician,4,Delhi,2021-01-28,62889
+150,Ananya Kundu,Female,Technician,4,Delhi,2022-04-27,42167
+151,Pooja Reddy,Female,Technician,5,Chennai,2021-08-25,32685
+152,Sudhin Reddy,Male,Sales Associate,5,Chennai,2022-07-27,57436
+153,Riya Reddy,Female,Technician,5,Chennai,2021-01-10,26692
+154,Megha Kundu,Female,Sales Associate,5,Chennai,2020-02-22,34380
+155,Megha Kundu,Female,Security,5,Chennai,2022-07-16,48316
+156,Tanvi Das,Female,Cleaning Staff,5,Chennai,2020-04-10,65944
+157,Vivek Das,Male,Assistant Manager,5,Chennai,2020-09-02,37073
+158,Rahul Verma,Male,Technician,5,Chennai,2020-07-18,76922
+159,Arjun Singh,Male,Store Manager,5,Chennai,2022-03-20,30462
+160,Pritam Gupta,Male,Store Manager,5,Chennai,2022-11-26,63071
+161,Rahul Das,Male,Technician,5,Chennai,2023-07-23,58756
+162,Sanjay Patil,Male,Store Manager,5,Chennai,2022-11-01,25751
+163,Amit Singh,Male,Sales Associate,5,Chennai,2023-12-06,53472
+164,Kiran Sharma,Male,Store Manager,5,Chennai,2023-10-07,71936
+165,Ishita Gupta,Female,Sales Associate,6,Pune,2022-11-18,62973
+166,Ananya Das,Female,Technician,6,Pune,2023-03-03,51598
+167,Vivek Gupta,Male,Cashier,6,Pune,2020-06-09,77347
+168,Rohan Singh,Male,Technician,6,Pune,2022-01-30,78941
+169,Deepak Das,Male,Assistant Manager,6,Pune,2023-06-14,55821
+170,Sanjay Nair,Male,Store Manager,6,Pune,2020-04-15,18438
+171,Deepak Patil,Male,Security,6,Pune,2022-02-21,20970
+172,Sneha Gupta,Female,Store Manager,6,Pune,2023-04-28,77927
+173,Megha Gupta,Female,Cleaning Staff,6,Pune,2020-01-10,63242
+174,Rahul Singh,Male,Sales Associate,6,Pune,2020-08-28,61626
+175,Tanvi Das,Female,Store Manager,6,Pune,2024-01-30,38621
+176,Sonal Kundu,Female,Assistant Manager,6,Pune,2021-02-28,33605
+177,Priya Nair,Female,Store Manager,6,Pune,2023-08-05,69904
+178,Priya Iyer,Female,Store Manager,6,Pune,2023-12-12,69390
+179,Priya Verma,Female,Security,6,Pune,2022-09-01,37878
+180,Pooja Iyer,Female,Security,7,Kolkata,2020-09-23,46522
+181,Sanjay Das,Male,Assistant Manager,7,Kolkata,2023-01-25,48043
+182,Sneha Kundu,Female,Assistant Manager,7,Kolkata,2023-02-05,27064
+183,Deepak Kundu,Male,Sales Associate,7,Kolkata,2022-08-24,47810
+184,Ishita Reddy,Female,Sales Associate,7,Kolkata,2021-03-13,52643
+185,Pritam Nair,Male,Cashier,7,Kolkata,2022-11-29,67814
+186,Sonal Reddy,Female,Technician,7,Kolkata,2022-10-19,83326
+187,Sonal Gupta,Female,Sales Associate,7,Kolkata,2023-04-13,33760
+188,Ishita Sharma,Female,Sales Associate,7,Kolkata,2020-10-12,68599
+189,Tanvi Verma,Female,Technician,7,Kolkata,2023-01-26,84505
+190,Amit Nair,Male,Assistant Manager,7,Kolkata,2021-06-18,35953
+191,Sudhin Reddy,Male,Store Manager,7,Kolkata,2020-05-15,77081
+192,Arjun Das,Male,Technician,7,Kolkata,2020-03-21,38313
+193,Sneha Gupta,Female,Sales Associate,7,Kolkata,2023-12-05,65318
+194,Tanvi Verma,Female,Assistant Manager,7,Kolkata,2023-03-22,51426
+195,Sonal Gupta,Female,Cleaning Staff,8,Ahmedabad,2023-11-25,45990
+196,Arjun Sharma,Male,Technician,8,Ahmedabad,2021-07-06,74569
+197,Ananya Iyer,Female,Store Manager,8,Ahmedabad,2020-02-20,57369
+198,Sanjay Reddy,Male,Store Manager,8,Ahmedabad,2023-03-24,80158
+199,Kavya Iyer,Female,Technician,8,Ahmedabad,2021-11-04,32106
+200,Priya Verma,Female,Cleaning Staff,8,Ahmedabad,2021-12-14,48999
+201,Vivek Reddy,Male,Store Manager,8,Ahmedabad,2020-07-11,37069
+202,Kavya Das,Female,Cashier,8,Ahmedabad,2022-12-09,82546
+203,Sanjay Reddy,Male,Security,8,Ahmedabad,2021-05-16,77278
+204,Amit Das,Male,Sales Associate,8,Ahmedabad,2023-04-13,67953
+205,Ananya Kundu,Female,Assistant Manager,8,Ahmedabad,2020-05-31,33440
+206,Pritam Kundu,Male,Cashier,9,Jaipur,2022-12-22,77229
+207,Riya Iyer,Female,Security,9,Jaipur,2022-09-01,69704
+208,Tanvi Gupta,Female,Assistant Manager,9,Jaipur,2022-07-15,84444
+209,Amit Patil,Male,Technician,9,Jaipur,2022-04-24,74550
+210,Rohan Kundu,Male,Store Manager,9,Jaipur,2023-05-03,71309
+211,Priya Iyer,Female,Cleaning Staff,9,Jaipur,2021-11-28,42584
+212,Tanvi Reddy,Female,Technician,9,Jaipur,2023-10-21,40096
+213,Ananya Gupta,Female,Security,9,Jaipur,2021-05-05,27204
+214,Sneha Reddy,Female,Cashier,9,Jaipur,2021-02-10,36714
+215,Deepak Patil,Male,Cashier,9,Jaipur,2020-04-28,69739
+216,Pritam Verma,Male,Technician,9,Jaipur,2023-06-19,76712
+217,Vivek Nair,Male,Security,10,Lucknow,2021-02-12,83075
+218,Megha Nair,Female,Assistant Manager,10,Lucknow,2021-04-15,42511
+219,Ananya Gupta,Female,Sales Associate,10,Lucknow,2022-02-22,62401
+220,Vivek Reddy,Male,Assistant Manager,10,Lucknow,2023-10-31,73594
+221,Ananya Reddy,Female,Technician,10,Lucknow,2024-01-31,66489
+222,Tanvi Reddy,Female,Cashier,10,Lucknow,2020-12-28,21846
+223,Sonal Das,Female,Technician,10,Lucknow,2020-11-10,26169
+224,Amit Nair,Male,Security,10,Lucknow,2022-12-21,78305
+225,Arjun Verma,Male,Sales Associate,10,Lucknow,2024-01-13,58600
+226,Kiran Das,Male,Technician,10,Lucknow,2022-04-09,54157
+227,Rahul Nair,Male,Cleaning Staff,10,Lucknow,2022-12-21,36245
+228,Priya Singh,Female,Technician,10,Lucknow,2021-12-12,19016
+229,Sonal Iyer,Female,Cleaning Staff,10,Lucknow,2021-07-21,40214
+230,Sanjay Gupta,Male,Assistant Manager,10,Lucknow,2022-09-05,82468
