@@ -3,7 +3,7 @@ import glob
 import os
 from cryptography.fernet import Fernet
 
-datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets', 'stg')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))
@@ -16,12 +16,12 @@ def find_file(pattern):
 # =============================================================================
 # Phone numbers are included in the employee file
 
-df = pd.read_csv(find_file('employees_*.csv')).head(5).copy()
+df = pd.read_csv(find_file('employee_*.csv')).head(5).copy()
 
 print("=" * 60)
 print("ORIGINAL DATA - First 5 Employees with Phone Numbers")
 print("=" * 60)
-print(df[['employee_id', 'employee_name', 'designation', 'phone']].to_string(index=False))
+print(df[['emp_id', 'emp_name', 'designation', 'phone_number']].to_string(index=False))
 
 # =============================================================================
 # Step 2: Generate an encryption key
@@ -50,9 +50,9 @@ print("\n" + "=" * 60)
 print("STEP 3: Encrypting Phone Numbers")
 print("=" * 60)
 
-df['phone_encrypted'] = df['phone'].apply(lambda x: cipher.encrypt(str(x).encode()).decode())
+df['phone_encrypted'] = df['phone_number'].apply(lambda x: cipher.encrypt(str(x).encode()).decode())
 
-print(df[['employee_id', 'employee_name', 'phone', 'phone_encrypted']].to_string(index=False))
+print(df[['emp_id', 'emp_name', 'phone_number', 'phone_encrypted']].to_string(index=False))
 
 # =============================================================================
 # Step 4: Decrypt phone numbers
@@ -66,4 +66,4 @@ print("=" * 60)
 
 df['phone_decrypted'] = df['phone_encrypted'].apply(lambda x: cipher.decrypt(x.encode()).decode())
 
-print(df[['employee_id', 'employee_name', 'phone_encrypted', 'phone_decrypted']].to_string(index=False))
+print(df[['emp_id', 'emp_name', 'phone_encrypted', 'phone_decrypted']].to_string(index=False))

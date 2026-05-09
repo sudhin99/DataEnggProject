@@ -5,7 +5,7 @@ import requests
 import numpy as np
 
 # Set up the datasets folder path
-datasets_folder = os.path.join(os.path.dirname(__file__), '..', 'Datasets', 'stg')
+datasets_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets', 'stg')
 
 def find_file(pattern):
     matches = sorted(glob.glob(os.path.join(datasets_folder, pattern)))
@@ -52,8 +52,8 @@ print(f"  1 INR = {eur_rate} EUR")
 # =============================================================================
 # Step 3: Perform Currency Conversion (Implicitly implied by later steps)
 # =============================================================================
-products['mrp_usd'] = products['mrp'] * usd_rate
-products['mrp_eur'] = products['mrp'] * eur_rate
+products['MRP_USD'] = products['MRP'] * usd_rate
+products['MRP_EUR'] = products['MRP'] * eur_rate
 
 # =============================================================================
 # Step 4: Display the converted prices
@@ -61,7 +61,7 @@ products['mrp_eur'] = products['mrp'] * eur_rate
 
 print("\n--- Product Prices with Currency Conversion ---\n")
 
-display_cols = ['product_name', 'category', 'mrp', 'mrp_usd', 'mrp_eur']
+display_cols = ['product_name', 'category', 'MRP', 'MRP_USD', 'MRP_EUR']
 print(products[display_cols].to_string(index=False))
 
 # =============================================================================
@@ -69,16 +69,16 @@ print(products[display_cols].to_string(index=False))
 # =============================================================================
 
 print("\n--- Top 5 Most Expensive Products (in USD) ---")
-top5 = products.sort_values('mrp_usd', ascending=False).head(5)
+top5 = products.sort_values('MRP_USD', ascending=False).head(5)
 for _, row in top5.iterrows():
-    print(f" {row['product_name']:<30} ₹{row['mrp']:,} = ${row['mrp_usd']:,}")
+    print(f" {row['product_name']:<30} ₹{row['MRP']:,} = ${row['MRP_USD']:,}")
 
 # =============================================================================
 # Step 6: Statistics using NumPy
 # =============================================================================
 
-mrp_array = np.array(products['mrp'])
-usd_array = np.array(products['mrp_usd'])
+mrp_array = np.array(products['MRP'])
+usd_array = np.array(products['MRP_USD'])
 
 print("\n--- MRP Statistics (numpy) ---")
 print(f" Mean MRP   : ₹{np.mean(mrp_array):,.2f} = ${np.mean(usd_array):,.2f}")

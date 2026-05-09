@@ -39,13 +39,28 @@ You should see `(venv)` prefixed in your terminal prompt after activation.
 
 ## Step 3: Install Required Packages
 
-Install all dependencies using pip:
+### Option A: Install with activated venv (Recommended)
+
+First, activate the virtual environment (see Step 2), then install:
 
 ```powershell
-pip install pandas pyarrow openpyxl numpy requests textblob matplotlib
+pip install pandas pyarrow openpyxl numpy requests textblob matplotlib cryptography
 pip install snowflake-connector-python snowflake-sqlalchemy python-pptx
 ```
+### Option B: Install directly to venv WITHOUT activating
 
+Run pip directly from the venv Scripts folder:
+
+```powershell
+.\venv\Scripts\pip.exe install pandas pyarrow openpyxl numpy requests textblob matplotlib cryptography
+.\venv\Scripts\pip.exe install snowflake-connector-python snowflake-sqlalchemy python-pptx
+```
+
+Or to install just cryptography:
+
+```powershell
+.\venv\Scripts\pip.exe install cryptography
+```
 ### Package Details
 
 | Package | Purpose |

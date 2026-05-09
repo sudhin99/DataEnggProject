@@ -1,0 +1,151 @@
+emp_id,emp_name,gender,designation,store_id,city,store_name,joining_date,salary,phone_number
+101,Amit Patil,Male,Sales Associate,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2019-02-06,75821,+91-6230994520
+102,Amit Patil,Male,Security,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2021-04-23,35076,+91-9004970071
+103,Rohan Singh,Male,Cleaning Staff,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2024-07-14,37207,+91-6588075256
+104,Vivek Singh,Male,Cashier,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2023-10-23,54089,+91-8861661119
+105,Tanvi Iyer,Female,Assistant Manager,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2022-08-10,44346,+91-6636734281
+106,Sneha Verma,Female,Cashier,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2020-05-13,38182,+91-6971709480
+107,Kiran Reddy,Male,Cleaning Staff,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2021-09-06,46160,+91-9277574193
+108,Vivek Verma,Male,Assistant Manager,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2024-12-12,44295,+91-7184101836
+109,Vivek Nair,Male,Sales Associate,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2019-09-01,34087,+91-7403699305
+110,Sneha Iyer,Female,Cleaning Staff,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2024-05-23,70411,+91-6593490573
+111,Ananya Patil,Female,Sales Associate,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2021-11-13,61294,+91-9717444270
+112,Sudhin Reddy,Male,Cleaning Staff,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2024-10-25,36158,+91-8523101753
+113,Rahul Gupta,Male,Cleaning Staff,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2020-02-18,29607,+91-9874085715
+114,Amit Gupta,Male,Security,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2019-03-13,73832,+91-6825564453
+115,Arjun Reddy,Male,Cashier,1,Hyderabad,Reliant DigiTech Hyderabad Mall,2019-07-29,68604,+91-6710774247
+116,Pritam Sharma,Male,Sales Associate,2,Bangalore,Reliant DigiTech Bangalore High Street,2022-04-03,47848,+91-7508520404
+117,Kiran Das,Male,Technician,2,Bangalore,Reliant DigiTech Bangalore High Street,2019-05-23,62970,+91-7883104059
+118,Pooja Sharma,Female,Cleaning Staff,2,Bangalore,Reliant DigiTech Bangalore High Street,2023-12-07,69725,+91-8602072208
+119,Arjun Patil,Male,Cleaning Staff,2,Bangalore,Reliant DigiTech Bangalore High Street,2024-03-06,50568,+91-7052160462
+120,Ishita Kundu,Female,Store Manager,2,Bangalore,Reliant DigiTech Bangalore High Street,2021-08-10,75258,+91-9424049611
+121,Arjun Iyer,Male,Technician,2,Bangalore,Reliant DigiTech Bangalore High Street,2020-06-30,29835,+91-8386855733
+122,Pooja Patil,Female,Security,2,Bangalore,Reliant DigiTech Bangalore High Street,2021-12-12,68109,+91-8875273448
+123,Megha Gupta,Female,Cleaning Staff,2,Bangalore,Reliant DigiTech Bangalore High Street,2023-05-13,58163,+91-6315184833
+124,Arjun Reddy,Male,Security,2,Bangalore,Reliant DigiTech Bangalore High Street,2020-07-29,61278,+91-6524878642
+125,Priya Nair,Female,Cleaning Staff,2,Bangalore,Reliant DigiTech Bangalore High Street,2020-04-29,78404,+91-6275565039
+126,Vivek Nair,Male,Store Manager,2,Bangalore,Reliant DigiTech Bangalore High Street,2021-05-07,33428,+91-9227039451
+127,Priya Patil,Female,Cashier,2,Bangalore,Reliant DigiTech Bangalore High Street,2023-09-08,33273,+91-6471526414
+128,Kavya Gupta,Female,Cashier,2,Bangalore,Reliant DigiTech Bangalore High Street,2019-06-03,47708,+91-7967752652
+129,Pritam Reddy,Male,Cleaning Staff,2,Bangalore,Reliant DigiTech Bangalore High Street,2023-08-19,61003,+91-7884099118
+130,Vivek Reddy,Male,Security,2,Bangalore,Reliant DigiTech Bangalore High Street,2020-10-11,59897,+91-8719984395
+131,Pooja Iyer,Female,Cleaning Staff,3,Mumbai,Reliant DigiTech Mumbai Mall,2023-10-03,27363,+91-6063975954
+132,Kiran Sharma,Male,Cleaning Staff,3,Mumbai,Reliant DigiTech Mumbai Mall,2022-07-05,59538,+91-9192249106
+133,Priya Singh,Female,Security,3,Mumbai,Reliant DigiTech Mumbai Mall,2023-06-10,76457,+91-7368884134
+134,Tanvi Patil,Female,Sales Associate,3,Mumbai,Reliant DigiTech Mumbai Mall,2019-02-17,73123,+91-8261650196
+135,Vivek Patil,Male,Technician,3,Mumbai,Reliant DigiTech Mumbai Mall,2024-09-06,54061,+91-7743719589
+136,Ananya Iyer,Female,Store Manager,3,Mumbai,Reliant DigiTech Mumbai Mall,2020-11-13,30320,+91-8049693591
+137,Rahul Das,Male,Assistant Manager,3,Mumbai,Reliant DigiTech Mumbai Mall,2020-03-23,64113,+91-7577204346
+138,Pooja Verma,Female,Cashier,3,Mumbai,Reliant DigiTech Mumbai Mall,2019-11-11,56453,+91-7898455291
+139,Rohan Gupta,Male,Cashier,3,Mumbai,Reliant DigiTech Mumbai Mall,2021-01-10,61691,+91-6848154533
+140,Pooja Das,Female,Cleaning Staff,3,Mumbai,Reliant DigiTech Mumbai Mall,2021-12-24,27544,+91-7072941671
+141,Sneha Verma,Female,Security,3,Mumbai,Reliant DigiTech Mumbai Mall,2021-12-15,23911,+91-8133737846
+142,Sonal Sharma,Female,Security,3,Mumbai,Reliant DigiTech Mumbai Mall,2019-05-04,52834,+91-9835446711
+143,Rohan Reddy,Male,Sales Associate,3,Mumbai,Reliant DigiTech Mumbai Mall,2019-08-26,54352,+91-7314527659
+144,Kiran Reddy,Male,Sales Associate,3,Mumbai,Reliant DigiTech Mumbai Mall,2019-09-15,37686,+91-6719766793
+145,Arjun Verma,Male,Security,3,Mumbai,Reliant DigiTech Mumbai Mall,2020-01-15,34451,+91-7127542978
+146,Vivek Das,Male,Security,4,Delhi,Reliant DigiTech Delhi Mall,2020-03-25,71099,+91-9440629501
+147,Megha Nair,Female,Technician,4,Delhi,Reliant DigiTech Delhi Mall,2020-10-11,47881,+91-7946345932
+148,Sanjay Verma,Male,Store Manager,4,Delhi,Reliant DigiTech Delhi Mall,2024-11-05,51878,+91-9721907909
+149,Pooja Das,Female,Store Manager,4,Delhi,Reliant DigiTech Delhi Mall,2024-05-15,66590,+91-9345104093
+150,Kavya Iyer,Female,Store Manager,4,Delhi,Reliant DigiTech Delhi Mall,2019-06-26,53995,+91-8848016464
+151,Ishita Iyer,Female,Store Manager,4,Delhi,Reliant DigiTech Delhi Mall,2019-04-26,60041,+91-9074044231
+152,Kavya Singh,Female,Store Manager,4,Delhi,Reliant DigiTech Delhi Mall,2020-04-01,31278,+91-9385434787
+153,Priya Kundu,Female,Cashier,4,Delhi,Reliant DigiTech Delhi Mall,2023-02-01,26553,+91-7906288056
+154,Megha Kundu,Female,Security,4,Delhi,Reliant DigiTech Delhi Mall,2022-02-21,43240,+91-7954503140
+155,Tanvi Singh,Female,Store Manager,4,Delhi,Reliant DigiTech Delhi Mall,2024-06-17,54893,+91-8111242687
+156,Kavya Singh,Female,Security,4,Delhi,Reliant DigiTech Delhi Mall,2019-03-09,67110,+91-6411909639
+157,Ishita Reddy,Female,Security,4,Delhi,Reliant DigiTech Delhi Mall,2024-09-12,38687,+91-8214279538
+158,Pritam Nair,Male,Assistant Manager,4,Delhi,Reliant DigiTech Delhi Mall,2024-05-14,59777,+91-8327906836
+159,Rahul Verma,Male,Cleaning Staff,4,Delhi,Reliant DigiTech Delhi Mall,2023-01-16,35495,+91-6123810728
+160,Deepak Sharma,Male,Technician,4,Delhi,Reliant DigiTech Delhi Mall,2024-06-13,48546,+91-6497901768
+161,Ishita Iyer,Female,Sales Associate,5,Chennai,Reliant DigiTech Chennai High Street,2022-04-15,78738,+91-7629288814
+162,Riya Kundu,Female,Store Manager,5,Chennai,Reliant DigiTech Chennai High Street,2019-04-01,30915,+91-9503249612
+163,Priya Patil,Female,Cashier,5,Chennai,Reliant DigiTech Chennai High Street,2022-03-27,21465,+91-7392725067
+164,Megha Reddy,Female,Technician,5,Chennai,Reliant DigiTech Chennai High Street,2020-08-30,66423,+91-8542663139
+165,Sneha Nair,Female,Cleaning Staff,5,Chennai,Reliant DigiTech Chennai High Street,2021-06-23,64730,+91-9150892453
+166,Rahul Iyer,Male,Cleaning Staff,5,Chennai,Reliant DigiTech Chennai High Street,2020-11-19,52316,+91-6072121177
+167,Sneha Patil,Female,Technician,5,Chennai,Reliant DigiTech Chennai High Street,2021-03-10,52405,+91-6305558726
+168,Amit Kundu,Male,Sales Associate,5,Chennai,Reliant DigiTech Chennai High Street,2023-02-26,40524,+91-9931694092
+169,Rohan Iyer,Male,Sales Associate,5,Chennai,Reliant DigiTech Chennai High Street,2019-10-18,57949,+91-6196555564
+170,Riya Nair,Female,Security,5,Chennai,Reliant DigiTech Chennai High Street,2019-04-28,36964,+91-9175592483
+171,Arjun Verma,Male,Store Manager,5,Chennai,Reliant DigiTech Chennai High Street,2020-07-22,51168,+91-8306279165
+172,Pritam Iyer,Male,Sales Associate,5,Chennai,Reliant DigiTech Chennai High Street,2022-01-26,52508,+91-8661902142
+173,Pooja Gupta,Female,Technician,5,Chennai,Reliant DigiTech Chennai High Street,2021-12-10,38987,+91-9729071296
+174,Deepak Iyer,Male,Cleaning Staff,5,Chennai,Reliant DigiTech Chennai High Street,2022-08-29,62179,+91-9801848508
+175,Ishita Kundu,Female,Technician,5,Chennai,Reliant DigiTech Chennai High Street,2024-05-11,24479,+91-7187226178
+176,Sneha Sharma,Female,Technician,6,Pune,Reliant DigiTech Pune Mall,2024-04-28,71047,+91-6398636005
+177,Pritam Verma,Male,Cleaning Staff,6,Pune,Reliant DigiTech Pune Mall,2019-03-16,61509,+91-7972958338
+178,Rohan Iyer,Male,Store Manager,6,Pune,Reliant DigiTech Pune Mall,2022-12-30,65224,+91-7010988761
+179,Sanjay Singh,Male,Store Manager,6,Pune,Reliant DigiTech Pune Mall,2019-09-22,53198,+91-8615174552
+180,Sudhin Kundu,Male,Assistant Manager,6,Pune,Reliant DigiTech Pune Mall,2021-04-26,63018,+91-6638221867
+181,Riya Kundu,Female,Cleaning Staff,6,Pune,Reliant DigiTech Pune Mall,2020-11-09,61802,+91-8248507003
+182,Sonal Patil,Female,Cashier,6,Pune,Reliant DigiTech Pune Mall,2022-09-01,26272,+91-6578260009
+183,Tanvi Sharma,Female,Sales Associate,6,Pune,Reliant DigiTech Pune Mall,2019-09-05,56237,+91-8504994906
+184,Pooja Gupta,Female,Cashier,6,Pune,Reliant DigiTech Pune Mall,2021-04-13,65842,+91-9236698103
+185,Deepak Reddy,Male,Cleaning Staff,6,Pune,Reliant DigiTech Pune Mall,2019-03-19,30438,+91-6239082247
+186,Riya Gupta,Female,Security,6,Pune,Reliant DigiTech Pune Mall,2020-11-28,48253,+91-7614878413
+187,Pooja Sharma,Female,Security,6,Pune,Reliant DigiTech Pune Mall,2024-05-30,71488,+91-8116313716
+188,Amit Nair,Male,Sales Associate,6,Pune,Reliant DigiTech Pune Mall,2024-07-20,65766,+91-9017748890
+189,Amit Iyer,Male,Sales Associate,6,Pune,Reliant DigiTech Pune Mall,2020-12-23,39626,+91-7870180856
+190,Riya Iyer,Female,Technician,6,Pune,Reliant DigiTech Pune Mall,2022-07-10,35625,+91-7519709858
+191,Kavya Singh,Female,Assistant Manager,7,Kolkata,Reliant DigiTech Kolkata High Street,2021-06-28,37284,+91-6743864814
+192,Riya Nair,Female,Store Manager,7,Kolkata,Reliant DigiTech Kolkata High Street,2022-03-22,26292,+91-8484277660
+193,Ananya Gupta,Female,Cashier,7,Kolkata,Reliant DigiTech Kolkata High Street,2020-12-12,36833,+91-7090798224
+194,Vivek Singh,Male,Cleaning Staff,7,Kolkata,Reliant DigiTech Kolkata High Street,2022-03-26,54249,+91-9507092433
+195,Vivek Singh,Male,Technician,7,Kolkata,Reliant DigiTech Kolkata High Street,2023-08-16,28121,+91-7927335180
+196,Arjun Iyer,Male,Cashier,7,Kolkata,Reliant DigiTech Kolkata High Street,2024-07-08,39693,+91-6136391915
+197,Rahul Sharma,Male,Store Manager,7,Kolkata,Reliant DigiTech Kolkata High Street,2024-11-13,79413,+91-7404237090
+198,Megha Gupta,Female,Cashier,7,Kolkata,Reliant DigiTech Kolkata High Street,2021-09-02,22576,+91-6984403412
+199,Pritam Reddy,Male,Cashier,7,Kolkata,Reliant DigiTech Kolkata High Street,2023-03-09,31067,+91-6369681502
+200,Tanvi Sharma,Female,Technician,7,Kolkata,Reliant DigiTech Kolkata High Street,2022-01-08,78377,+91-6048463671
+201,Rohan Iyer,Male,Technician,7,Kolkata,Reliant DigiTech Kolkata High Street,2023-11-25,78304,+91-9085370722
+202,Sanjay Kundu,Male,Sales Associate,7,Kolkata,Reliant DigiTech Kolkata High Street,2023-08-16,45245,+91-7396065790
+203,Amit Das,Male,Technician,7,Kolkata,Reliant DigiTech Kolkata High Street,2024-05-06,41438,+91-7168619502
+204,Sanjay Verma,Male,Technician,7,Kolkata,Reliant DigiTech Kolkata High Street,2020-04-20,41181,+91-6560282512
+205,Vivek Kundu,Male,Technician,7,Kolkata,Reliant DigiTech Kolkata High Street,2022-03-13,49334,+91-9136723397
+206,Rohan Verma,Male,Cleaning Staff,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2019-07-05,43833,+91-9914287936
+207,Sonal Kundu,Female,Cashier,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2019-05-23,26248,+91-9422353556
+208,Tanvi Verma,Female,Cleaning Staff,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2023-01-26,22889,+91-8133740168
+209,Tanvi Iyer,Female,Sales Associate,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2020-02-06,58760,+91-8295967414
+210,Pooja Das,Female,Security,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2019-02-11,77839,+91-7049646910
+211,Vivek Iyer,Male,Sales Associate,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2023-12-12,53365,+91-9885025999
+212,Vivek Kundu,Male,Security,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2020-03-19,23951,+91-7718487557
+213,Amit Reddy,Male,Store Manager,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2021-09-16,66371,+91-8647694490
+214,Ananya Kundu,Female,Technician,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2019-11-27,53870,+91-8762390583
+215,Vivek Singh,Male,Assistant Manager,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2022-10-30,36690,+91-9760755775
+216,Megha Patil,Female,Sales Associate,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2024-11-27,28382,+91-6408794690
+217,Ananya Gupta,Female,Cleaning Staff,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2021-12-06,28080,+91-9403491558
+218,Sanjay Iyer,Male,Sales Associate,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2019-09-06,28121,+91-9951511845
+219,Tanvi Patil,Female,Technician,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2024-07-21,46696,+91-8888983999
+220,Kavya Sharma,Female,Assistant Manager,8,Hyderabad,Reliant DigiTech Hyderabad Tech Park,2019-04-20,39758,+91-6431737042
+221,Vivek Gupta,Male,Assistant Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2019-01-31,73517,+91-9649523514
+222,Priya Sharma,Female,Technician,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2023-05-18,54448,+91-9972404214
+223,Amit Reddy,Male,Cashier,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2020-01-22,45559,+91-6259497463
+224,Amit Patil,Male,Assistant Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2024-06-09,53090,+91-9598321380
+225,Arjun Iyer,Male,Cleaning Staff,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2023-10-02,74652,+91-6720059234
+226,Kavya Iyer,Female,Technician,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2020-05-31,44143,+91-9566812352
+227,Deepak Verma,Male,Store Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2021-09-11,55848,+91-6537002383
+228,Priya Gupta,Female,Assistant Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2024-06-05,43231,+91-8752905478
+229,Vivek Sharma,Male,Sales Associate,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2022-12-05,46918,+91-7030831332
+230,Sudhin Das,Male,Assistant Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2020-02-17,33463,+91-9389351749
+231,Megha Iyer,Female,Assistant Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2022-10-29,39831,+91-9787677458
+232,Sonal Patil,Female,Cashier,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2019-09-11,68033,+91-9118333116
+233,Pooja Reddy,Female,Sales Associate,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2021-07-14,53654,+91-9576988726
+234,Rahul Iyer,Male,Assistant Manager,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2019-07-20,35591,+91-7131978243
+235,Sanjay Sharma,Male,Technician,9,Mumbai,Reliant DigiTech Mumbai Tech Park,2021-10-25,26746,+91-8185463183
+236,Rahul Nair,Male,Assistant Manager,10,Delhi,Reliant DigiTech Delhi Tech Park,2024-04-09,33638,+91-6280842592
+237,Pooja Iyer,Female,Cleaning Staff,10,Delhi,Reliant DigiTech Delhi Tech Park,2021-09-19,72260,+91-8813385660
+238,Megha Gupta,Female,Sales Associate,10,Delhi,Reliant DigiTech Delhi Tech Park,2019-11-15,24098,+91-8284650836
+239,Amit Reddy,Male,Sales Associate,10,Delhi,Reliant DigiTech Delhi Tech Park,2022-07-15,52339,+91-7437411934
+240,Deepak Kundu,Male,Sales Associate,10,Delhi,Reliant DigiTech Delhi Tech Park,2021-04-08,74053,+91-8089825156
+241,Arjun Verma,Male,Cashier,10,Delhi,Reliant DigiTech Delhi Tech Park,2024-12-10,46858,+91-8981234563
+242,Sudhin Iyer,Male,Store Manager,10,Delhi,Reliant DigiTech Delhi Tech Park,2021-12-21,30659,+91-9642732111
+243,Sanjay Verma,Male,Store Manager,10,Delhi,Reliant DigiTech Delhi Tech Park,2023-12-26,42442,+91-9247249295
+244,Sudhin Reddy,Male,Technician,10,Delhi,Reliant DigiTech Delhi Tech Park,2024-05-31,39594,+91-9480964760
+245,Rohan Iyer,Male,Assistant Manager,10,Delhi,Reliant DigiTech Delhi Tech Park,2024-10-10,53753,+91-6257990376
+246,Sanjay Kundu,Male,Cashier,10,Delhi,Reliant DigiTech Delhi Tech Park,2019-09-08,38192,+91-7230241463
+247,Kiran Reddy,Male,Cashier,10,Delhi,Reliant DigiTech Delhi Tech Park,2019-08-16,31773,+91-8384539395
+248,Tanvi Nair,Female,Assistant Manager,10,Delhi,Reliant DigiTech Delhi Tech Park,2020-09-12,38438,+91-6399870513
+249,Riya Gupta,Female,Store Manager,10,Delhi,Reliant DigiTech Delhi Tech Park,2022-10-12,62288,+91-9198202992
+250,Tanvi Das,Female,Security,10,Delhi,Reliant DigiTech Delhi Tech Park,2021-09-19,58933,+91-8060610131
