@@ -103,7 +103,7 @@ while current <= end_date:
 # =============================================================================
 
 df = pd.DataFrame(rows)
-output_folder = os.path.join(os.path.dirname(__file__), '..', 'data_output')
+output_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'data_output')
 os.makedirs(output_folder, exist_ok=True)
 output_path = os.path.join(output_folder, 'date_dim.csv')
 df.to_csv(output_path, index=False)

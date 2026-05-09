@@ -107,7 +107,7 @@ print(products['price_bucket'].value_counts().to_string())
 # Step 8: Save to CSV
 # =============================================================================
 
-output_folder = os.path.join(os.path.dirname(__file__), '..', 'data_output')
+output_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'data_output')
 os.makedirs(output_folder, exist_ok=True)
 output_path = os.path.join(output_folder, 'products_with_usd.csv')
 products.to_csv(output_path, index=False)

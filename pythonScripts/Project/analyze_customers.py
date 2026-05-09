@@ -56,7 +56,7 @@ def signup_2025_monthly_chart():
     plt.xticks(rotation=0)
     plt.tight_layout()
 
-    charts_folder = os.path.join(os.path.dirname(__file__), '..', 'charts')
+    charts_folder = os.path.join(os.path.dirname(__file__), '..', '..', 'charts')
     os.makedirs(charts_folder, exist_ok=True)
     plt.savefig(os.path.join(charts_folder, 'customer_signups_2025.png'), dpi=150)
     plt.show()
