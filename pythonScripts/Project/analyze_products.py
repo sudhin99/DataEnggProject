@@ -15,11 +15,6 @@ file_path = find_file('products_*.csv')
 df = pd.read_csv(file_path)
 print(f"Step 1: File loaded successfully! ({os.path.basename(file_path)})")
 
-# Calculate profit margin % column once - used across all functions
-# margin % = (MRP - purchase price) / purchase price * 100
-df['margin_pct'] = ((df['MRP'] - df['purchase_price']) / df['purchase_price'] * 100).round(2)
-
-print("Step 1: File loaded successfully!")
 print("Total rows   :", len(df))
 print("Total columns:", len(df.columns))
 print("Column names :", list(df.columns))
@@ -92,6 +87,8 @@ def category_profit_margin():
     print("\n" + "=" * 60)
     print("CATEGORY-WISE PROFIT MARGIN DETAILS")
     print("=" * 60)
+    
+    df['margin_pct'] = ((df['MRP'] - df['purchase_price']) / df['purchase_price'] * 100).round(2)
 
     print("\n--- Overall Profit Margin Summary ---")
     print("Lowest margin  :", df['margin_pct'].min(), "%")

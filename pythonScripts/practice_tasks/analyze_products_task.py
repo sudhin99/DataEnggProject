@@ -13,7 +13,7 @@ import glob
 #
 # Columns in the dataset:
 #   product_id, product_name, category, brand,
-#   purchase_price, warranty_months, mrp
+#   purchase_price, MRP, warranty_months
 # ==============================================================================
 
 
