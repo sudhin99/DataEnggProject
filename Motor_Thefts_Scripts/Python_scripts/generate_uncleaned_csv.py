@@ -1,6 +1,6 @@
 import csv
 from pathlib import Path
-base = Path(__file__).resolve().parents[2] / 'datasets' / 'Motor Therfts' / 'Raw'
+base = Path(__file__).resolve().parents[2] / 'datasets' / 'Motor_Therfts' / 'Raw'
 files = [
     'locations.csv',
     'make_details.csv',

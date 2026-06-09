@@ -2,8 +2,8 @@ import pandas as pd
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-RAW_DIR = BASE_DIR / 'datasets' / 'Motor Therfts' / 'Raw'
-PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor Therfts' / 'Processed'
+RAW_DIR = BASE_DIR / 'datasets' / 'Motor_Therfts' / 'Raw'
+PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor_Therfts' / 'Processed'
 
 OUTPUT_SUFFIX = '_cleaned.csv'
 

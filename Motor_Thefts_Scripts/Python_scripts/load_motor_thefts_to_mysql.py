@@ -14,9 +14,9 @@ except ImportError as exc:
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor Therfts' / 'Processed'
+PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor_Therfts' / 'Processed'
 CONFIG_PATH = Path(__file__).resolve().parent.parent / 'Config' / 'db_config.ini'
-SQL_PATH = Path(__file__).resolve().parent.parent / 'SQL scripts' / 'join_motor_thefts.sql'
+SQL_PATH = Path(__file__).resolve().parent.parent / 'SQL_scripts' / 'join_motor_thefts.sql'
 
 TABLE_DEFINITIONS = {
     'locations': (
