@@ -11,6 +11,24 @@ pip --version
 
 ---
 
+## Step 0: Set Git Username and Email
+
+Set your git identity before making commits:
+
+```powershell
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+To confirm the values:
+
+```powershell
+git config --global user.name
+git config --global user.email
+```
+
+---
+
 ## Step 1: Create a Virtual Environment
 
 Navigate to the project root and create a virtual environment:
