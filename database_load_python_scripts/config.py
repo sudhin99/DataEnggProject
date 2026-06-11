@@ -3,6 +3,8 @@ MySQL Configuration for Reliant DigiTech Data Warehouse
 Configure your MySQL connection details here before running the load scripts.
 """
 
+from sqlalchemy.engine import URL
+
 # ==============================================================================
 # MySQL Connection Configuration
 # ==============================================================================
@@ -12,9 +14,7 @@ MYSQL_CONFIG = {
     'host': 'localhost',             # MySQL server hostname
     'port': 3306,                    # MySQL server port (default: 3306)
     'user': 'root',                    # MySQL username
-    'password': 'your_password',        # MySQL password
-    'charset': 'utf8mb4',
-    'collation': 'utf8mb4_unicode_ci'
+    'password': 'MyNewPass@1'       # MySQL password
 }
 
 # ==============================================================================
@@ -28,10 +28,14 @@ DATABASE_GOLD = 'RELIANT_DWH_GOLD'
 # Helper Functions
 # ==============================================================================
 def get_connection_string(database):
-    """Create SQLAlchemy connection string for given database."""
-    return (
-        f"mysql+pymysql://{MYSQL_CONFIG['user']}:{MYSQL_CONFIG['password']}"
-        f"@{MYSQL_CONFIG['host']}:{MYSQL_CONFIG['port']}/{database}"
+    """Create a safe SQLAlchemy connection URL for the requested database."""
+    return URL.create(
+        "mysql+pymysql",
+        username=MYSQL_CONFIG['user'],
+        password=MYSQL_CONFIG['password'],
+        host=MYSQL_CONFIG['host'],
+        port=MYSQL_CONFIG['port'],
+        database=database,
     )
 
 # ==============================================================================

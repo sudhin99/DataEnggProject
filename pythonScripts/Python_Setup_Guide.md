@@ -45,7 +45,7 @@ First, activate the virtual environment (see Step 2), then install:
 
 ```powershell
 pip install pandas pyarrow openpyxl numpy requests textblob matplotlib cryptography
-pip install snowflake-connector-python snowflake-sqlalchemy python-pptx
+pip install snowflake-connector-python snowflake-sqlalchemy mysql-connector-python python-pptx 
 ```
 ### Option B: Install directly to venv WITHOUT activating
 

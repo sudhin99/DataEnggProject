@@ -23,7 +23,7 @@ from config import DATABASE_BRONZE, get_connection_string
 def find_customers_files():
     """Find all customers files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'Datasets', 'stg'))
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
     for pattern in ['customers_*.xlsx', 'customers_*.xls', 'customers_*.csv']:
@@ -70,7 +70,7 @@ def load_customers():
     print(f"Found {len(file_paths)} customers file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'Datasets'))
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'datasets', 'Reliant_Digitech'))
     processed_folder = os.path.join(datasets_folder, 'processed')
     failed_folder = os.path.join(datasets_folder, 'failed')
     os.makedirs(processed_folder, exist_ok=True)

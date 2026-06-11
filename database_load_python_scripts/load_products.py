@@ -23,7 +23,7 @@ from config import DATABASE_BRONZE, MYSQL_CONFIG
 def find_products_files():
     """Find all products files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'Datasets', 'stg'))
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
     for pattern in ['products_*.csv']:
@@ -67,7 +67,7 @@ def load_products():
     print(f"Found {len(file_paths)} products file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'Datasets'))
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'datasets', 'Reliant_Digitech'))
     processed_folder = os.path.join(datasets_folder, 'processed')
     failed_folder = os.path.join(datasets_folder, 'failed')
     os.makedirs(processed_folder, exist_ok=True)
@@ -79,7 +79,8 @@ def load_products():
         port=MYSQL_CONFIG['port'],
         user=MYSQL_CONFIG['user'],
         password=MYSQL_CONFIG['password'],
-        database=DATABASE_BRONZE
+        database=DATABASE_BRONZE,
+        use_pure=True
     )
     
     total_rows = success_count = failed_count = skipped_count = 0
@@ -109,7 +110,6 @@ def load_products():
             
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
-            conn.start_transaction()
             try:
                 cursor = conn.cursor()
                 columns = df.columns.tolist()
@@ -130,7 +130,7 @@ def load_products():
                 total_rows += rows
                 success_count += 1
                 
-            except Exception as e:
+            except Exception:
                 conn.rollback()
                 raise
                 
