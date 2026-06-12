@@ -23,7 +23,7 @@ from config import DATABASE_BRONZE, get_connection_string
 def find_feedback_files():
     """Find all feedback files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'Datasets', 'stg'))
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
     for pattern in ['customer_feedback_*.csv']:
@@ -69,7 +69,7 @@ def load_feedback():
     print(f"Found {len(file_paths)} feedback file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets'))
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
     processed_folder = os.path.join(datasets_folder, 'processed')
     failed_folder = os.path.join(datasets_folder, 'failed')
     

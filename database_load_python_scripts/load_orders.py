@@ -23,7 +23,7 @@ from config import DATABASE_BRONZE, get_connection_string
 def find_orders_files():
     """Find all orders files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'Datasets', 'stg'))
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
     for pattern in ['orders_*.csv']:
@@ -33,6 +33,7 @@ def find_orders_files():
 def check_if_already_loaded(conn, file_name, table_name):
     """Check if file was already loaded successfully."""
     query = text("""
+                SELECT COUNT(1)
         FROM FILE_LOAD_LOG
         WHERE file_name = :file_name
           AND table_name = :table_name
@@ -68,7 +69,7 @@ def load_orders():
     print(f"Found {len(file_paths)} orders file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets'))
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
     processed_folder = os.path.join(datasets_folder, 'processed')
     failed_folder = os.path.join(datasets_folder, 'failed')
     

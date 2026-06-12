@@ -21,14 +21,12 @@ from sqlalchemy import create_engine, text
 from config import DATABASE_BRONZE, get_connection_string
 
 def find_date_dim_files():
-    """Find all date dimension files in stg folder."""
+    """Find the generated date dimension CSV in data_output."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'Datasets', 'stg'))
-    
-    all_files = []
-    for pattern in ['date_dim_*.csv']:
-        all_files.extend(sorted(glob.glob(os.path.join(stg_folder, pattern))))
-    return all_files
+    output_folder = os.path.abspath(os.path.join(script_dir, '..', 'data_output'))
+
+    file_path = os.path.join(output_folder, 'date_dim.csv')
+    return [file_path] if os.path.exists(file_path) else []
 
 def check_if_already_loaded(conn, file_name, table_name):
     """Check if file was already loaded successfully."""
@@ -63,15 +61,16 @@ def load_date_dim():
     # Find all files
     file_paths = find_date_dim_files()
     if not file_paths:
-        print("Error: No date dimension files found (date_dim_*.csv)")
+        print("Error: No date dimension file found (data_output/date_dim.csv)")
         sys.exit(1)
         
     print(f"Found {len(file_paths)} date dimension file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets'))
-    processed_folder = os.path.join(datasets_folder, 'processed')
-    failed_folder = os.path.join(datasets_folder, 'failed')
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
+    output_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data_output'))
+    processed_folder = os.path.join(output_folder, 'processed')
+    failed_folder = os.path.join(output_folder, 'failed')
     
     os.makedirs(processed_folder, exist_ok=True)
     os.makedirs(failed_folder, exist_ok=True)

@@ -23,10 +23,10 @@ from config import DATABASE_BRONZE, get_connection_string
 def find_stores_files():
     """Find all store details files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'Datasets', 'stg'))
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
-    for pattern in ['store_details_*.csv', 'store_details_*.parquet']:
+    for pattern in ['Ref_Store_Details_*.csv', 'store_details_*.csv', 'store_details_*.parquet']:
         all_files.extend(sorted(glob.glob(os.path.join(stg_folder, pattern))))
     return all_files
 
@@ -68,7 +68,7 @@ def load_stores():
     print(f"Found {len(file_paths)} store file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Datasets'))
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
     processed_folder = os.path.join(datasets_folder, 'processed')
     failed_folder = os.path.join(datasets_folder, 'failed')
     
