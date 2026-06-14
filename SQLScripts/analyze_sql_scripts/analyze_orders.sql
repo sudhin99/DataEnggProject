@@ -49,9 +49,4 @@ ORDER BY total_revenue DESC;
 -- 4. Find top 10 customers by revenue
 -- ============================================================================
 
--- Solution:
-WITH customer_stats AS (
-    SELECT 
-        customer_id,
-        COUNT(*) AS order_count,
-        SUM(CAST(revenue AS
+

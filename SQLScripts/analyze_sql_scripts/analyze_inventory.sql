@@ -89,11 +89,3 @@ WHERE opening_stock IS NOT NULL AND closing_stock IS NOT NULL
 GROUP BY store_id
 ORDER BY inventory_change ASC;
 
-
--- ============================================================================
--- SCENARIO 4: Inventory Date Analysis
--- ============================================================================
--- Task: Analyze inventory patterns over time
--- 
--- Requirements:
---

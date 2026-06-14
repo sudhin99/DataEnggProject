@@ -78,21 +78,3 @@ FROM store_stats s
 CROSS JOIN overall_avg o
 ORDER BY s.avg_rating DESC;
 
--- ============================================================================
--- SCENARIO 3: Feedback Channel Analysis
--- ============================================================================
--- Task: Analyze feedback by channel
---
--- Requirements:
--- 1. Count feedback by channel
--- 2. Calculate average rating by channel
--- 3. Find most popular channel
--- 4. Compare channel performance
--- ============================================================================
-
--- Solution:
-SELECT
-    channel,
-    COUNT(*) AS feedback_count,
-    AVG(CAST(rating AS UNSIGNED)) AS avg_rating,
-    ROUND(COUNT(*) * 100.0 / (

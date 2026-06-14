@@ -102,7 +102,7 @@ def load_products():
             
             # Prepare DataFrame
             df.columns = [col.upper() for col in df.columns]
-            for col in ['LOADED_AT', 'IS_PROCESSED', 'SOURCE_FILE', 'ROW_HASH']:
+            for col in ['LOADED_AT', 'IS_PROCESSED', 'SOURCE_FILE']:
                 if col in df.columns:
                     df = df.drop(columns=[col])
             df['SOURCE_FILE'] = file_name

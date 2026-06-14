@@ -21,15 +21,14 @@ USE RELIANT_DWH_BRONZE;
 -- ============================================================================
 -- SCENARIO 1: Customer Demographics Analysis
 -- ============================================================================
--- Task: Analyze customer distribution by city and gender
+-- Task: Analyze customer distribution by city 
 --
 -- Requirements:
 -- 1. Count total customers by city
--- 2. Count customers by gender within each city
 -- 3. Calculate the percentage of customers in each city
 -- 4. Find cities with more than 50 customers
 --
--- Expected output columns: city, total_customers, gender_count, gender, city_percentage
+-- Expected output columns: city, total_customers, gender, city_percentage
 -- ============================================================================
 
 -- Write your query here:

@@ -63,19 +63,19 @@ ORDER BY ct.total_products DESC, brand_count DESC;
 -- 
 -- Requirements:
 -- 1. Calculate average purchase price by category
--- 2. Calculate average selling price by category
--- 3. Calculate profit margin (selling_price - purchase_price) by category
+-- 2. Calculate average MRP by category
+-- 3. Calculate profit margin (MRP - purchase_price) by category
 -- 4. Find categories with highest profit margin
 -- 
--- Expected output columns: category, avg_purchase_price, avg_selling_price, profit_margin
+-- Expected output columns: category, avg_purchase_price, avg_MRP, profit_margin
 -- ============================================================================
 
 -- Solution:
 SELECT 
     category,
     ROUND(AVG(purchase_price), 2) AS avg_purchase_price,
-    ROUND(AVG(selling_price), 2) AS avg_selling_price,
-    ROUND(AVG(selling_price) - AVG(purchase_price), 2) AS profit_margin
+    ROUND(AVG(MRP), 2) AS avg_MRP,
+    ROUND(AVG(MRP) - AVG(purchase_price), 2) AS profit_margin
 FROM STG_PRODUCTS
 GROUP BY category
 ORDER BY profit_margin DESC;
@@ -124,14 +124,14 @@ ORDER BY category;
 -- ============================================================================
 -- SCENARIO 4: Product Ranking by Price
 -- ============================================================================
--- Task: Rank products within categories by selling price using window functions
+-- Task: Rank products within categories by MRP using window functions
 -- 
 -- Requirements:
--- 1. Rank products within each category by selling price (highest first)
+-- 1. Rank products within each category by MRP (highest first)
 -- 2. Find top 3 most expensive products in each category
 -- 3. Calculate the price difference from the category average
 -- 
--- Expected output columns: category, product_name, selling_price, price_rank, category_avg_price, price_diff
+-- Expected output columns: category, product_name, MRP, price_rank, category_avg_price, price_diff
 -- ============================================================================
 
 -- Solution:
@@ -139,18 +139,18 @@ WITH ranked_products AS (
     SELECT 
         category,
         product_name,
-        selling_price,
-        DENSE_RANK() OVER (PARTITION BY category ORDER BY selling_price DESC) AS price_rank,
-        AVG(selling_price) OVER (PARTITION BY category) AS category_avg_price
+        MRP,
+        DENSE_RANK() OVER (PARTITION BY category ORDER BY MRP DESC) AS price_rank,
+        AVG(MRP) OVER (PARTITION BY category) AS category_avg_price
     FROM STG_PRODUCTS
 )
 SELECT 
     category,
     product_name,
-    selling_price,
+    MRP,
     price_rank,
     ROUND(category_avg_price, 2) AS category_avg_price,
-    ROUND(selling_price - category_avg_price, 2) AS price_diff
+    ROUND(MRP - category_avg_price, 2) AS price_diff
 FROM ranked_products
 WHERE price_rank <= 3
 ORDER BY category, price_rank;
