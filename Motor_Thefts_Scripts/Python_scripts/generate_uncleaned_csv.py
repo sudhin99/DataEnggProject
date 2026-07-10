@@ -1,6 +1,6 @@
 import csv
 from pathlib import Path
-base = Path(__file__).resolve().parents[2] / 'datasets' / 'Motor_Therfts' / 'Raw'
+base = Path(__file__).resolve().parents[2] / 'datasets' / 'Motor_Thefts' / 'Raw'
 files = [
     'locations.csv',
     'make_details.csv',
@@ -11,6 +11,11 @@ files = [
 for file_name in files:
     input_path = base / file_name
     output_path = base / f"{input_path.stem}_uncleaned.csv"
+
+    if not input_path.exists():
+        print(f'Skipping missing input file: {input_path.name}')
+        continue
+
     with input_path.open('r', newline='', encoding='utf-8') as inf:
         reader = list(csv.reader(inf))
     rows = [row[:] for row in reader]

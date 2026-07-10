@@ -1,0 +1,13 @@
+host=127.0.0.1
+port=3306
+user=root
+database=mysql_practice
+TCP_CONNECT 127.0.0.1=OK
+TCP_CONNECT 127.0.0.1=OK
+TCP_CONNECT localhost=OK
+MYSQL_CONNECT 127.0.0.1=OK
+MYSQL_CONNECT 127.0.0.1=ProgrammingError: 1046 (3D000): No database selected
+MYSQL_CONNECT 127.0.0.1=OK
+MYSQL_CONNECT 127.0.0.1=ProgrammingError: 1046 (3D000): No database selected
+MYSQL_CONNECT localhost=OK
+MYSQL_CONNECT localhost=ProgrammingError: 1046 (3D000): No database selected

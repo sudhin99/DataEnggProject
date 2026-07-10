@@ -2,8 +2,8 @@ import pandas as pd
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-RAW_DIR = BASE_DIR / 'datasets' / 'Motor_Therfts' / 'Raw'
-PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor_Therfts' / 'Processed'
+RAW_DIR = BASE_DIR / 'datasets' / 'Motor_Thefts' / 'Raw'
+PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor_Thefts' / 'Processed'
 
 OUTPUT_SUFFIX = '_cleaned.csv'
 
@@ -109,7 +109,8 @@ def main() -> None:
     for file_name, cleaner in file_map.items():
         source_path = RAW_DIR / file_name
         if not source_path.exists():
-            raise FileNotFoundError(f'Missing input file: {source_path}')
+            print(f'Skipping missing input file: {source_path.name}')
+            continue
         df = pd.read_csv(source_path, dtype=str)
         cleaned = cleaner(df)
         output_path = save_cleaned(cleaned, source_path)

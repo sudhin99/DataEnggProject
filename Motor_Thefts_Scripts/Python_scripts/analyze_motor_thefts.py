@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor_Therfts' / 'Processed'
+PROCESSED_DIR = BASE_DIR / 'datasets' / 'Motor_Thefts' / 'Processed'
 
 
 def load_data() -> pd.DataFrame:
