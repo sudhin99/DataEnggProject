@@ -1,16 +1,16 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS sp_load_silver_stores$$
+DROP PROCEDURE IF EXISTS sp_load_silver_feedback$$
 
-CREATE PROCEDURE sp_load_silver_stores()
+CREATE PROCEDURE sp_load_silver_feedback()
 BEGIN
     DECLARE v_watermark TIMESTAMP;
     DECLARE v_new_watermark TIMESTAMP;
     DECLARE v_rows_merged INT DEFAULT 0;
     DECLARE v_started_at TIMESTAMP;
-    DECLARE v_sp_name VARCHAR(100) DEFAULT 'sp_load_silver_stores';
+    DECLARE v_sp_name VARCHAR(100) DEFAULT 'sp_load_silver_feedback';
     DECLARE v_layer VARCHAR(20) DEFAULT 'SILVER';
-    DECLARE v_target_table VARCHAR(100) DEFAULT 'RELIANT_DWH_SILVER.SILVER_STORES';
+    DECLARE v_target_table VARCHAR(100) DEFAULT 'RELIANT_DWH_SILVER.SILVER_FEEDBACK';
     DECLARE v_error_msg TEXT;
 
     DECLARE exit handler FOR SQLEXCEPTION
@@ -27,10 +27,10 @@ BEGIN
 
     SELECT COALESCE(MAX(updated_at), MAX(created_at), '1900-01-01 00:00:00')
     INTO v_watermark
-    FROM RELIANT_DWH_SILVER.SILVER_STORES;
+    FROM RELIANT_DWH_SILVER.SILVER_FEEDBACK;
 
     SELECT MAX(loaded_at) INTO v_new_watermark
-    FROM RELIANT_DWH_BRONZE.STG_STORES
+    FROM RELIANT_DWH_BRONZE.STG_FEEDBACK
     WHERE is_processed = FALSE AND loaded_at > v_watermark;
 
     IF v_new_watermark IS NULL THEN
@@ -40,47 +40,48 @@ BEGIN
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, 0, 'SUCCESS', 'No new records to process');
 
-        SELECT 'No new records to process in STG_STORES' AS result;
+        SELECT 'No new records to process in STG_FEEDBACK' AS result;
         LEAVE proc_label;
     END IF;
 
 proc_label: BEGIN
-    INSERT INTO RELIANT_DWH_SILVER.SILVER_STORES
-        (store_id, store_name, city, state, store_type, open_year, store_area_sqft, created_at, updated_at)
+    INSERT INTO RELIANT_DWH_SILVER.SILVER_FEEDBACK
+        (feedback_id, customer_id, customer_name, store_id, store_name, rating, comment, channel, feedback_date, created_at, updated_at)
     SELECT
+        CAST(NULLIF(TRIM(feedback_id), '') AS UNSIGNED) AS feedback_id,
+        CAST(NULLIF(TRIM(customer_id), '') AS UNSIGNED) AS customer_id,
+        NULL AS customer_name,
         CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
-        TRIM(store_name) AS store_name,
-        TRIM(city) AS city,
-        TRIM(state) AS state,
-        TRIM(store_type) AS store_type,
-        CAST(NULLIF(TRIM(open_year), '') AS SIGNED) AS open_year,
-        CAST(NULLIF(TRIM(store_area_sqft), '') AS SIGNED) AS store_area_sqft,
+        NULL AS store_name,
+        CAST(NULLIF(TRIM(rating), '') AS SIGNED) AS rating,
+        TRIM(comment) AS comment,
+        TRIM(channel) AS channel,
+        STR_TO_DATE(NULLIF(TRIM(date), ''), '%Y-%m-%d') AS feedback_date,
         NOW() AS created_at,
         NOW() AS updated_at
-    FROM RELIANT_DWH_BRONZE.STG_STORES
+    FROM RELIANT_DWH_BRONZE.STG_FEEDBACK
     WHERE is_processed = FALSE
       AND loaded_at > v_watermark
       AND loaded_at <= v_new_watermark
-      AND TRIM(store_id) <> ''
-      AND TRIM(store_id) REGEXP '^[0-9]+$'
+      AND TRIM(feedback_id) <> ''
+      AND TRIM(feedback_id) REGEXP '^[0-9]+$'
     ON DUPLICATE KEY UPDATE
-        store_name = VALUES(store_name),
-        city = VALUES(city),
-        state = VALUES(state),
-        store_type = VALUES(store_type),
-        open_year = VALUES(open_year),
-        store_area_sqft = VALUES(store_area_sqft),
+        customer_id = VALUES(customer_id),
+        rating = VALUES(rating),
+        comment = VALUES(comment),
+        channel = VALUES(channel),
+        feedback_date = VALUES(feedback_date),
         updated_at = NOW();
 
     SET v_rows_merged = ROW_COUNT();
 
-    UPDATE RELIANT_DWH_BRONZE.STG_STORES
+    UPDATE RELIANT_DWH_BRONZE.STG_FEEDBACK
     SET is_processed = TRUE
     WHERE is_processed = FALSE
       AND loaded_at > v_watermark
       AND loaded_at <= v_new_watermark;
 
-    DELETE FROM RELIANT_DWH_BRONZE.STG_STORES WHERE is_processed = TRUE;
+    DELETE FROM RELIANT_DWH_BRONZE.STG_FEEDBACK WHERE is_processed = TRUE;
 
     INSERT INTO RELIANT_DWH_BRONZE.SP_EXECUTION_LOG
         (sp_name, layer, target_table, started_at, ended_at, duration_secs, watermark_used, rows_merged, status, error_message)
