@@ -9,7 +9,5 @@ CREATE TABLE SILVER_REVIEWS (
     text            TEXT,
     review_date     DATE,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_google_reviews_store_id (store_id),
-    INDEX idx_silver_google_reviews_review_date (review_date)
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

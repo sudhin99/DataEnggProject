@@ -1,5 +1,5 @@
 """
-Load Google reviews data file into MySQL STG_GOOGLE_REVIEWS table.
+Load Google reviews data file into MySQL STG_REVIEWS table.
 
 Automatically finds files matching pattern: google_reviews_*.json
 
@@ -60,7 +60,7 @@ def log_file_load(conn, file_name, table_name, rows_loaded, status, error_msg=No
     conn.commit()
 
 def load_google_reviews():
-    """Load all Google reviews files into STG_GOOGLE_REVIEWS table."""
+    """Load all Google reviews files into STG_REVIEWS table."""
     # Find all files
     file_paths = find_google_reviews_files()
     if not file_paths:
@@ -86,7 +86,7 @@ def load_google_reviews():
         
         # Check if already loaded
         with engine.connect() as conn:
-            if check_if_already_loaded(conn, file_name, 'STG_GOOGLE_REVIEWS'):
+            if check_if_already_loaded(conn, file_name, 'STG_REVIEWS'):
                 print(f"  ⊗ Skipped: Already loaded successfully")
                 skipped_count += 1
                 continue
@@ -110,10 +110,10 @@ def load_google_reviews():
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
             with engine.begin() as conn:
-                df.to_sql(name='stg_google_reviews', con=conn, if_exists='append', index=False)
-                log_file_load(conn, file_name, 'STG_GOOGLE_REVIEWS', rows, 'SUCCESS')
+                df.to_sql(name='stg_reviews', con=conn, if_exists='append', index=False)
+                log_file_load(conn, file_name, 'STG_REVIEWS', rows, 'SUCCESS')
                 
-            print(f"  ✓ Successfully loaded {rows:,} rows into STG_GOOGLE_REVIEWS")
+            print(f"  ✓ Successfully loaded {rows:,} rows into STG_REVIEWS")
             
             shutil.move(file_path, os.path.join(processed_folder, file_name))
             print("  → Moved to processed/")
@@ -125,7 +125,7 @@ def load_google_reviews():
             print(f"  X Error: {e}")
             
             with engine.connect() as conn:
-                log_file_load(conn, file_name, 'STG_GOOGLE_REVIEWS', 0, 'FAILED', str(e))
+                log_file_load(conn, file_name, 'STG_REVIEWS', 0, 'FAILED', str(e))
                 
             shutil.move(file_path, os.path.join(failed_folder, file_name))
             print("  → Moved to failed/")

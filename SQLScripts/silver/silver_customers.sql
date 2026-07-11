@@ -11,7 +11,5 @@ CREATE TABLE SILVER_CUSTOMERS (
     email         VARCHAR(100),
     signup_date   DATE,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_customers_city (city),
-    INDEX idx_silver_customers_signup_date (signup_date)
+    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

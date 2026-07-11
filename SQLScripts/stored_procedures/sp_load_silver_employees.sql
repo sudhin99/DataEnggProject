@@ -1,17 +1,18 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS sp_load_silver_employees$$
+DROP PROCEDURE IF EXISTS RELIANT_DWH_SILVER.SP_LOAD_SILVER_EMPLOYEES$$
 
-CREATE PROCEDURE sp_load_silver_employees()
+CREATE PROCEDURE RELIANT_DWH_SILVER.SP_LOAD_SILVER_EMPLOYEES()
 BEGIN
-    DECLARE v_watermark TIMESTAMP;
-    DECLARE v_new_watermark TIMESTAMP;
+    DECLARE v_watermark DATETIME;
+    DECLARE v_new_watermark DATETIME;
     DECLARE v_rows_merged INT DEFAULT 0;
-    DECLARE v_started_at TIMESTAMP;
-    DECLARE v_sp_name VARCHAR(100) DEFAULT 'sp_load_silver_employees';
+    DECLARE v_started_at DATETIME;
+    DECLARE v_sp_name VARCHAR(100) DEFAULT 'RELIANT_DWH_SILVER.SP_LOAD_SILVER_EMPLOYEES';
     DECLARE v_layer VARCHAR(20) DEFAULT 'SILVER';
     DECLARE v_target_table VARCHAR(100) DEFAULT 'RELIANT_DWH_SILVER.SILVER_EMPLOYEES';
     DECLARE v_error_msg TEXT;
+    DECLARE v_result_message VARCHAR(512);
 
     DECLARE exit handler FOR SQLEXCEPTION
     BEGIN
@@ -25,14 +26,15 @@ BEGIN
 
     SET v_started_at = NOW();
 
-    SELECT COALESCE(MAX(updated_at), MAX(created_at), '1900-01-01 00:00:00')
+    SELECT COALESCE(MAX(updated_at), MAX(created_at), CAST('1999-01-01 00:00:01' AS DATETIME))
     INTO v_watermark
     FROM RELIANT_DWH_SILVER.SILVER_EMPLOYEES;
 
     SELECT MAX(loaded_at) INTO v_new_watermark
     FROM RELIANT_DWH_BRONZE.STG_EMPLOYEES
-    WHERE is_processed = FALSE AND loaded_at > v_watermark;
+    WHERE is_processed <> TRUE AND loaded_at > v_watermark;
 
+proc_label: BEGIN
     IF v_new_watermark IS NULL THEN
         INSERT INTO RELIANT_DWH_BRONZE.SP_EXECUTION_LOG
             (sp_name, layer, target_table, started_at, ended_at, duration_secs, watermark_used, rows_merged, status, error_message)
@@ -44,7 +46,6 @@ BEGIN
         LEAVE proc_label;
     END IF;
 
-proc_label: BEGIN
     INSERT INTO RELIANT_DWH_SILVER.SILVER_EMPLOYEES
         (emp_id, emp_name, gender, designation, store_id, city, store_name, joining_date, salary, phone_number, created_at, updated_at)
     SELECT
@@ -60,10 +61,10 @@ proc_label: BEGIN
         TRIM(phone_number) AS phone_number,
         NOW() AS created_at,
         NOW() AS updated_at
-    FROM RELIANT_DWH_BRONZE.STG_EMPLOYEES
-    WHERE is_processed = FALSE
-      AND loaded_at > v_watermark
-      AND loaded_at <= v_new_watermark
+        FROM RELIANT_DWH_BRONZE.STG_EMPLOYEES
+        WHERE is_processed <> TRUE
+            AND loaded_at > v_watermark
+            AND loaded_at <= v_new_watermark
       AND TRIM(emp_id) <> ''
       AND TRIM(emp_id) REGEXP '^[0-9]+$'
     ON DUPLICATE KEY UPDATE
@@ -80,11 +81,11 @@ proc_label: BEGIN
 
     SET v_rows_merged = ROW_COUNT();
 
-    UPDATE RELIANT_DWH_BRONZE.STG_EMPLOYEES
-    SET is_processed = TRUE
-    WHERE is_processed = FALSE
-      AND loaded_at > v_watermark
-      AND loaded_at <= v_new_watermark;
+        UPDATE RELIANT_DWH_BRONZE.STG_EMPLOYEES
+        SET is_processed = TRUE
+        WHERE is_processed <> TRUE
+            AND loaded_at > v_watermark
+            AND loaded_at <= v_new_watermark;
 
     DELETE FROM RELIANT_DWH_BRONZE.STG_EMPLOYEES WHERE is_processed = TRUE;
 

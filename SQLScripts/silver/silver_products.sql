@@ -11,7 +11,5 @@ CREATE TABLE SILVER_PRODUCTS (
     MRP             DECIMAL(12,2),
     warranty_months INT,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_products_category (category),
-    INDEX idx_silver_products_brand (brand)
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

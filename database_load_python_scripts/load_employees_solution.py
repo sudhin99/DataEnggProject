@@ -14,18 +14,17 @@ import glob
 import pandas as pd
 import mysql.connector
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from database_load_python_scripts.config import DATABASE_BRONZE, MYSQL_CONFIG
+from config import DATABASE_BRONZE, MYSQL_CONFIG
 
 
 def find_employee_file():
     """Find the employee CSV file in the Reliant Digitech staging folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    stg_folder = os.path.abspath(os.path.join(script_dir, '..', '..', 'datasets', 'Reliant_Digitech', 'stg'))
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
 
     matches = sorted(glob.glob(os.path.join(stg_folder, 'employee_*.csv')))
     if not matches:
-        raise FileNotFoundError('No employee file found matching employee_*.csv')
+        raise FileNotFoundError(f'No employee file found matching employee_*.csv in {stg_folder}')
     return matches[-1]
 
 

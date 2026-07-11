@@ -1,5 +1,5 @@
 """
-Load customer feedback data file into MySQL STG_CUSTOMER_FEEDBACK table.
+Load customer feedback data file into MySQL STG_FEEDBACK table.
 
 Automatically finds files matching pattern: customer_feedback_*.csv
 
@@ -59,7 +59,7 @@ def log_file_load(conn, file_name, table_name, rows_loaded, status, error_msg=No
     conn.commit()
 
 def load_feedback():
-    """Load all feedback files into STG_CUSTOMER_FEEDBACK table."""
+    """Load all feedback files into STG_FEEDBACK table."""
     # Find all files
     file_paths = find_feedback_files()
     if not file_paths:
@@ -85,7 +85,7 @@ def load_feedback():
         
         # Check if already loaded
         with engine.connect() as conn:
-            if check_if_already_loaded(conn, file_name, 'STG_CUSTOMER_FEEDBACK'):
+            if check_if_already_loaded(conn, file_name, 'STG_FEEDBACK'):
                 print(f"  ⊗ Skipped: Already loaded successfully")
                 skipped_count += 1
                 continue
@@ -107,10 +107,10 @@ def load_feedback():
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
             with engine.begin() as conn:
-                df.to_sql(name='stg_customer_feedback', con=conn, if_exists='append', index=False)
-                log_file_load(conn, file_name, 'STG_CUSTOMER_FEEDBACK', rows, 'SUCCESS')
+                df.to_sql(name='STG_FEEDBACK', con=conn, if_exists='append', index=False)
+                log_file_load(conn, file_name, 'STG_FEEDBACK', rows, 'SUCCESS')
                 
-            print(f"  ✓ Successfully loaded {rows:,} rows into STG_CUSTOMER_FEEDBACK")
+            print(f"  ✓ Successfully loaded {rows:,} rows into STG_FEEDBACK")
             
             shutil.move(file_path, os.path.join(processed_folder, file_name))
             print("  → Moved to processed/")
@@ -122,7 +122,7 @@ def load_feedback():
             print(f"  X Error: {e}")
             
             with engine.connect() as conn:
-                log_file_load(conn, file_name, 'STG_CUSTOMER_FEEDBACK', 0, 'FAILED', str(e))
+                log_file_load(conn, file_name, 'STG_FEEDBACK', 0, 'FAILED', str(e))
                 
             shutil.move(file_path, os.path.join(failed_folder, file_name))
             print("  → Moved to failed/")

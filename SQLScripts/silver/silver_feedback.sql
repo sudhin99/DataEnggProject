@@ -13,8 +13,5 @@ CREATE TABLE SILVER_FEEDBACK (
     channel       VARCHAR(50),
     feedback_date DATE,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_feedback_customer_id (customer_id),
-    INDEX idx_silver_feedback_store_id (store_id),
-    INDEX idx_silver_feedback_feedback_date (feedback_date)
+    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

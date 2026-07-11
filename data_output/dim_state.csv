@@ -1,0 +1,37 @@
+state_key,state_code,state_name,country_name,capital
+ST01,AP,Andhra Pradesh,INDIA,Amaravati
+ST02,AR,Arunachal Pradesh,INDIA,Itanagar
+ST03,AS,Assam,INDIA,Dispur
+ST04,BR,Bihar,INDIA,Patna
+ST05,CT,Chhattisgarh,INDIA,Raipur
+ST06,GA,Goa,INDIA,Panaji
+ST07,GJ,Gujarat,INDIA,Gandhinagar
+ST08,HR,Haryana,INDIA,Chandigarh
+ST09,HP,Himachal Pradesh,INDIA,Shimla
+ST10,JH,Jharkhand,INDIA,Ranchi
+ST11,KA,Karnataka,INDIA,Bengaluru
+ST12,KL,Kerala,INDIA,Thiruvananthapuram
+ST13,MP,Madhya Pradesh,INDIA,Bhopal
+ST14,MH,Maharashtra,INDIA,Mumbai
+ST15,MN,Manipur,INDIA,Imphal
+ST16,ML,Meghalaya,INDIA,Shillong
+ST17,MZ,Mizoram,INDIA,Aizawl
+ST18,NL,Nagaland,INDIA,Kohima
+ST19,OR,Odisha,INDIA,Bhubaneswar
+ST20,PB,Punjab,INDIA,Chandigarh
+ST21,RJ,Rajasthan,INDIA,Jaipur
+ST22,SK,Sikkim,INDIA,Gangtok
+ST23,TN,Tamil Nadu,INDIA,Chennai
+ST24,TG,Telangana,INDIA,Hyderabad
+ST25,TR,Tripura,INDIA,Agartala
+ST26,UP,Uttar Pradesh,INDIA,Lucknow
+ST27,UT,Uttarakhand,INDIA,Dehradun
+ST28,WB,West Bengal,INDIA,Kolkata
+ST29,DL,Delhi,INDIA,New Delhi
+ST30,AN,Andaman and Nicobar Islands,INDIA,Port Blair
+ST31,CH,Chandigarh,INDIA,Chandigarh
+ST32,DN,Dadra and Nagar Haveli and Daman and Diu,INDIA,Daman
+ST33,JK,Jammu and Kashmir,INDIA,Srinagar
+ST34,LA,Lakshadweep,INDIA,Kavaratti
+ST35,LD,Ladakh,INDIA,Leh
+ST36,PY,Puducherry,INDIA,Puducherry

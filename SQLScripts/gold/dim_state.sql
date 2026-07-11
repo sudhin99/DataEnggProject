@@ -3,10 +3,10 @@ USE RELIANT_DWH_GOLD;
 DROP TABLE IF EXISTS DIM_STATE;
 
 CREATE TABLE DIM_STATE (
-    state_key    INT AUTO_INCREMENT PRIMARY KEY,
+    state_key    VARCHAR(20) PRIMARY KEY,
     state_code   VARCHAR(10),
     state_name   VARCHAR(100),
     country_name VARCHAR(100) DEFAULT 'INDIA',
-    updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    capital      VARCHAR(100)
     UNIQUE KEY uk_state_code (state_code)
 );

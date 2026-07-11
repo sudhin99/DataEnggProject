@@ -1,11 +1,11 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS sp_load_dim_customer$$
+DROP PROCEDURE IF EXISTS RELIANT_DWH_GOLD.SP_LOAD_DIM_CUSTOMER$$
 
-CREATE PROCEDURE sp_load_dim_customer()
+CREATE PROCEDURE RELIANT_DWH_GOLD.SP_LOAD_DIM_CUSTOMER()
 BEGIN
     DECLARE v_started_at TIMESTAMP;
-    DECLARE v_sp_name VARCHAR(100) DEFAULT 'sp_load_dim_customer';
+    DECLARE v_sp_name VARCHAR(100) DEFAULT 'RELIANT_DWH_GOLD.SP_LOAD_DIM_CUSTOMER';
     DECLARE v_layer VARCHAR(20) DEFAULT 'GOLD';
     DECLARE v_target_table VARCHAR(100) DEFAULT 'RELIANT_DWH_GOLD.DIM_CUSTOMER';
     DECLARE v_error_msg TEXT;
@@ -24,7 +24,7 @@ BEGIN
 
     SET v_started_at = NOW();
 
-    SELECT COALESCE(MAX(updated_at), '1970-01-01') INTO v_watermark FROM RELIANT_DWH_GOLD.DIM_CUSTOMER;
+    SELECT COALESCE(MAX(updated_at), '1999-01-01 00:00:01') INTO v_watermark FROM RELIANT_DWH_GOLD.DIM_CUSTOMER;
 
     SELECT MAX(updated_at) INTO v_new_watermark FROM RELIANT_DWH_SILVER.SILVER_CUSTOMERS WHERE updated_at > v_watermark;
     IF v_new_watermark IS NULL THEN
@@ -33,8 +33,7 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()), v_watermark, 0, 'NOOP', NULL);
         SELECT CONCAT(v_sp_name, ': no new customer updates since ', v_watermark) AS result;
-        LEAVE proc_end;
-    END IF;
+    ELSE
 
     INSERT INTO RELIANT_DWH_GOLD.DIM_CUSTOMER
         (customer_id, customer_name, gender, city, phone, email, signup_date, created_at, updated_at)
@@ -66,8 +65,7 @@ BEGIN
         TIMESTAMPDIFF(SECOND, v_started_at, NOW()), v_new_watermark, v_rows, 'SUCCESS', NULL);
 
     SELECT CONCAT(v_sp_name, ': ', v_rows, ' customer rows upserted. Watermark=', v_new_watermark) AS result;
-
-    proc_end: BEGIN END;
+ END IF;
 END$$
 
 DELIMITER ;

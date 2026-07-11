@@ -49,6 +49,6 @@ FILE_TABLE_MAP = {
     'store_details': 'STG_STORES',
     'inventory': 'STG_INVENTORY',
     'customer_feedback': 'STG_FEEDBACK',
-    'google_reviews': 'STG_GOOGLE_REVIEWS',
+    'google_reviews': 'STG_REVIEWS',
     'date_dim': 'STG_DATE_DIM',
 }

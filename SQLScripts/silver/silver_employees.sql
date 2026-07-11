@@ -14,8 +14,5 @@ CREATE TABLE SILVER_EMPLOYEES (
     salary          DECIMAL(12,2),
     phone_number    VARCHAR(50),
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_employees_store_id (store_id),
-    INDEX idx_silver_employees_city (city),
-    INDEX idx_silver_employees_joining_date (joining_date)
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -12,7 +12,5 @@ CREATE TABLE SILVER_ORDERS (
     selling_price DECIMAL(12,2),
     revenue       DECIMAL(12,2),
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_orders_product_id (product_id),
-    INDEX idx_silver_orders_order_date (order_date)
+    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

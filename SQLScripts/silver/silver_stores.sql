@@ -11,8 +11,5 @@ CREATE TABLE SILVER_STORES (
     open_year         INT,
     store_area_sqft   INT,
     created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_silver_stores_city (city),
-    INDEX idx_silver_stores_state (state),
-    INDEX idx_silver_stores_store_type (store_type)
+    updated_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
