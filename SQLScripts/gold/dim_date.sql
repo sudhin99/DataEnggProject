@@ -6,7 +6,7 @@ CREATE TABLE DIM_DATE (
     date_key    INT PRIMARY KEY AUTO_INCREMENT,
     the_date    DATE NOT NULL,
     year        INT,
-    quarter     INT,
+    quarter     VARCHAR(5),
     month       INT,
     month_name  VARCHAR(20),
     day         INT,

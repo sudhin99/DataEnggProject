@@ -12,6 +12,7 @@ CREATE TABLE FACT_SALES (
     quantity        INT,
     selling_price   DECIMAL(10,2),
     revenue         DECIMAL(12,2),
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE KEY uk_order_id (order_id),
     INDEX idx_date_key (date_key),

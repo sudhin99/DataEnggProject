@@ -22,6 +22,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -44,32 +47,44 @@ BEGIN
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'SUCCESS', 'No new records to process');
     ELSE
-        INSERT INTO RELIANT_DWH_SILVER.SILVER_PRODUCTS
-        (product_id, product_name, category, brand, purchase_price, MRP, warranty_months, created_at, updated_at)
-    SELECT
-        CAST(NULLIF(TRIM(product_id), '') AS UNSIGNED) AS product_id,
-        TRIM(product_name) AS product_name,
-        TRIM(category) AS category,
-        TRIM(brand) AS brand,
-        CAST(NULLIF(REPLACE(TRIM(purchase_price), '$', ''), '') AS DECIMAL(12,2)) AS purchase_price,
-        CAST(NULLIF(REPLACE(TRIM(MRP), '$', ''), '') AS DECIMAL(12,2)) AS MRP,
-        CAST(NULLIF(TRIM(warranty_months), '') AS SIGNED) AS warranty_months,
-        NOW() AS created_at,
-        NOW() AS updated_at
-        FROM RELIANT_DWH_BRONZE.STG_PRODUCTS
-        WHERE is_processed <> TRUE
-            AND loaded_at > v_watermark
-            AND loaded_at <= v_new_watermark
-      AND TRIM(product_id) <> ''
-      AND TRIM(product_id) REGEXP '^[0-9]+$'
-    ON DUPLICATE KEY UPDATE
-        product_name = VALUES(product_name),
-        category = VALUES(category),
-        brand = VALUES(brand),
-        purchase_price = VALUES(purchase_price),
-        MRP = VALUES(MRP),
-        warranty_months = VALUES(warranty_months),
-        updated_at = NOW();
+        INSERT INTO RELIANT_DWH_SILVER.SILVER_PRODUCTS (
+            product_id,
+            product_name,
+            category,
+            brand,
+            purchase_price,
+            MRP,
+            warranty_months,
+            created_at,
+            updated_at
+        )
+        SELECT *
+        FROM (
+            SELECT
+                CAST(NULLIF(TRIM(product_id), '') AS UNSIGNED) AS product_id,
+                TRIM(product_name) AS product_name,
+                TRIM(category) AS category,
+                TRIM(brand) AS brand,
+                CAST(NULLIF(REPLACE(TRIM(purchase_price), '$', ''), '') AS DECIMAL(12,2)) AS purchase_price,
+                CAST(NULLIF(REPLACE(TRIM(MRP), '$', ''), '') AS DECIMAL(12,2)) AS MRP,
+                CAST(NULLIF(TRIM(warranty_months), '') AS SIGNED) AS warranty_months,
+                NOW() AS created_at,
+                NOW() AS updated_at
+            FROM RELIANT_DWH_BRONZE.STG_PRODUCTS
+            WHERE is_processed <> TRUE
+              AND loaded_at > v_watermark
+              AND loaded_at <= v_new_watermark
+              AND TRIM(product_id) <> ''
+              AND TRIM(product_id) REGEXP '^[0-9]+$'
+        ) AS src
+        ON DUPLICATE KEY UPDATE
+            product_name    = src.product_name,
+            category        = src.category,
+            brand           = src.brand,
+            purchase_price  = src.purchase_price,
+            MRP             = src.MRP,
+            warranty_months = src.warranty_months,
+            updated_at      = NOW();
 
     SET v_rows_merged = ROW_COUNT();
 

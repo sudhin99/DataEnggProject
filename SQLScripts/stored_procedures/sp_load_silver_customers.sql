@@ -22,6 +22,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -44,32 +47,45 @@ BEGIN
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'SUCCESS', 'No new records to process');
     ELSE
-        INSERT INTO RELIANT_DWH_SILVER.SILVER_CUSTOMERS
-        (customer_id, customer_name, gender, city, phone, email, signup_date, created_at, updated_at)
-    SELECT
-        CAST(NULLIF(TRIM(customer_id), '') AS UNSIGNED) AS customer_id,
-        TRIM(customer_name) AS customer_name,
-        TRIM(gender) AS gender,
-        TRIM(city) AS city,
-        TRIM(phone) AS phone,
-        TRIM(email) AS email,
-        STR_TO_DATE(NULLIF(TRIM(signup_date), ''), '%Y-%m-%d') AS signup_date,
-        NOW() AS created_at,
-        NOW() AS updated_at
-        FROM RELIANT_DWH_BRONZE.STG_CUSTOMERS
-        WHERE is_processed <> TRUE
-            AND loaded_at > v_watermark
-            AND loaded_at <= v_new_watermark
-      AND TRIM(customer_id) <> ''
-      AND TRIM(customer_id) REGEXP '^[0-9]+$'
-    ON DUPLICATE KEY UPDATE
-        customer_name = VALUES(customer_name),
-        gender = VALUES(gender),
-        city = VALUES(city),
-        phone = VALUES(phone),
-        email = VALUES(email),
-        signup_date = VALUES(signup_date),
-        updated_at = NOW();
+        INSERT INTO RELIANT_DWH_SILVER.SILVER_CUSTOMERS (
+            customer_id,
+            customer_name,
+            gender,
+            city,
+            phone,
+            email,
+            signup_date,
+            created_at,
+            updated_at
+        )
+        SELECT *
+        FROM (
+            SELECT
+                CAST(NULLIF(TRIM(customer_id), '') AS UNSIGNED) AS customer_id,
+                TRIM(customer_name) AS customer_name,
+                TRIM(gender) AS gender,
+                TRIM(city) AS city,
+                TRIM(phone) AS phone,
+                TRIM(email) AS email,
+                STR_TO_DATE(NULLIF(TRIM(signup_date), ''), '%Y-%m-%d') AS signup_date,
+                NOW() AS created_at,
+                NOW() AS updated_at
+            FROM RELIANT_DWH_BRONZE.STG_CUSTOMERS
+            WHERE is_processed <> TRUE
+              AND loaded_at > v_watermark
+              AND loaded_at <= v_new_watermark
+              AND TRIM(customer_id) <> ''
+              AND TRIM(customer_id) REGEXP '^[0-9]+$'
+        ) AS src
+        ON DUPLICATE KEY UPDATE
+            customer_name = src.customer_name,
+            gender        = src.gender,
+            city          = src.city,
+            phone         = src.phone,
+            email         = src.email,
+            signup_date   = src.signup_date,
+            updated_at    = NOW();
+
 
     SET v_rows_merged = ROW_COUNT();
 

@@ -22,6 +22,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -46,38 +49,54 @@ proc_label: BEGIN
         LEAVE proc_label;
     END IF;
 
-    INSERT INTO RELIANT_DWH_SILVER.SILVER_EMPLOYEES
-        (emp_id, emp_name, gender, designation, store_id, city, store_name, joining_date, salary, phone_number, created_at, updated_at)
-    SELECT
-        CAST(NULLIF(TRIM(emp_id), '') AS UNSIGNED) AS emp_id,
-        TRIM(emp_name) AS emp_name,
-        TRIM(gender) AS gender,
-        TRIM(designation) AS designation,
-        CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
-        TRIM(city) AS city,
-        TRIM(store_name) AS store_name,
-        STR_TO_DATE(NULLIF(TRIM(joining_date), ''), '%Y-%m-%d') AS joining_date,
-        CAST(NULLIF(REPLACE(TRIM(salary), '$', ''), '') AS DECIMAL(12,2)) AS salary,
-        TRIM(phone_number) AS phone_number,
-        NOW() AS created_at,
-        NOW() AS updated_at
+    INSERT INTO RELIANT_DWH_SILVER.SILVER_EMPLOYEES (
+        emp_id,
+        emp_name,
+        gender,
+        designation,
+        store_id,
+        city,
+        store_name,
+        joining_date,
+        salary,
+        phone_number,
+        created_at,
+        updated_at
+    )
+    SELECT *
+    FROM (
+        SELECT
+            CAST(NULLIF(TRIM(emp_id), '') AS UNSIGNED) AS emp_id,
+            TRIM(emp_name) AS emp_name,
+            TRIM(gender) AS gender,
+            TRIM(designation) AS designation,
+            CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
+            TRIM(city) AS city,
+            TRIM(store_name) AS store_name,
+            STR_TO_DATE(NULLIF(TRIM(joining_date), ''), '%Y-%m-%d') AS joining_date,
+            CAST(NULLIF(REPLACE(TRIM(salary), '$', ''), '') AS DECIMAL(12,2)) AS salary,
+            TRIM(phone_number) AS phone_number,
+            NOW() AS created_at,
+            NOW() AS updated_at
         FROM RELIANT_DWH_BRONZE.STG_EMPLOYEES
         WHERE is_processed <> TRUE
-            AND loaded_at > v_watermark
-            AND loaded_at <= v_new_watermark
-      AND TRIM(emp_id) <> ''
-      AND TRIM(emp_id) REGEXP '^[0-9]+$'
+          AND loaded_at > v_watermark
+          AND loaded_at <= v_new_watermark
+          AND TRIM(emp_id) <> ''
+          AND TRIM(emp_id) REGEXP '^[0-9]+$'
+    ) AS src
     ON DUPLICATE KEY UPDATE
-        emp_name = VALUES(emp_name),
-        gender = VALUES(gender),
-        designation = VALUES(designation),
-        store_id = VALUES(store_id),
-        city = VALUES(city),
-        store_name = VALUES(store_name),
-        joining_date = VALUES(joining_date),
-        salary = VALUES(salary),
-        phone_number = VALUES(phone_number),
-        updated_at = NOW();
+        emp_name     = src.emp_name,
+        gender       = src.gender,
+        designation  = src.designation,
+        store_id     = src.store_id,
+        city         = src.city,
+        store_name   = src.store_name,
+        joining_date = src.joining_date,
+        salary       = src.salary,
+        phone_number = src.phone_number,
+        updated_at   = NOW();
+
 
     SET v_rows_merged = ROW_COUNT();
 

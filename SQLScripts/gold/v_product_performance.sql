@@ -6,8 +6,8 @@ SELECT
     p.product_name,
     p.category,
     p.brand,
-    p.selling_price,
-    p.profit_margin,
+    p.MRP,
+    f.selling_price-p.purchase_price AS profit_margin,
     COUNT(f.order_id)   AS total_orders,
     SUM(f.quantity)     AS total_units_sold,
     SUM(f.revenue)      AS total_revenue
@@ -18,5 +18,5 @@ GROUP BY
     p.product_name, 
     p.category, 
     p.brand, 
-    p.selling_price, 
-    p.profit_margin;
+    p.MRP,
+    profit_margin;

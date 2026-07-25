@@ -23,6 +23,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+            
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -48,8 +51,19 @@ BEGIN
     ELSE
         START TRANSACTION;
 
-        INSERT INTO RELIANT_DWH_SILVER.SILVER_STORES
-            (store_id, store_name, city, state, store_type, open_year, store_area_sqft, created_at, updated_at)
+        INSERT INTO RELIANT_DWH_SILVER.SILVER_STORES (
+        store_id,
+        store_name,
+        city,
+        state,
+        store_type,
+        open_year,
+        store_area_sqft,
+        created_at,
+        updated_at
+    )
+    SELECT *
+    FROM (
         SELECT
             CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
             TRIM(store_name) AS store_name,
@@ -60,19 +74,20 @@ BEGIN
             CAST(NULLIF(TRIM(store_area_sqft), '') AS SIGNED) AS store_area_sqft,
             NOW() AS created_at,
             NOW() AS updated_at
-            FROM RELIANT_DWH_BRONZE.STG_STORES
-            WHERE is_processed <> TRUE
-                AND loaded_at > v_watermark
-                AND loaded_at <= v_new_watermark
-                AND TRIM(store_id) <> ''
-        ON DUPLICATE KEY UPDATE
-            store_name = VALUES(store_name),
-            city = VALUES(city),
-            state = VALUES(state),
-            store_type = VALUES(store_type),
-            open_year = VALUES(open_year),
-            store_area_sqft = VALUES(store_area_sqft),
-            updated_at = NOW();
+        FROM RELIANT_DWH_BRONZE.STG_STORES
+        WHERE is_processed <> TRUE
+          AND loaded_at > v_watermark
+          AND loaded_at <= v_new_watermark
+          AND TRIM(store_id) <> ''
+    ) AS src
+    ON DUPLICATE KEY UPDATE
+        store_name      = src.store_name,
+        city            = src.city,
+        state           = src.state,
+        store_type      = src.store_type,
+        open_year       = src.open_year,
+        store_area_sqft = src.store_area_sqft,
+        updated_at      = NOW(); 
 
         SET v_rows_merged = ROW_COUNT();
 

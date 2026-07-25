@@ -2,14 +2,12 @@ USE RELIANT_DWH_GOLD;
 
 CREATE OR REPLACE VIEW VW_SALES_SUMMARY AS
 SELECT
-    d.full_date,
+    d.the_date,
     d.year,
     d.month_name,
     d.quarter,
-    d.weekday_name,
-    d.day_type,
-    d.is_public_holiday,
-    d.holiday_name,
+    d.day_of_week,
+    d.is_weekend,
     s.store_name,
     s.city AS store_city,
     s.store_type,

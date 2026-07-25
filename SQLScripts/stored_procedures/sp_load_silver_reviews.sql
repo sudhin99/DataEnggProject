@@ -22,6 +22,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -44,28 +47,39 @@ BEGIN
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'SUCCESS', 'No new records to process');
     ELSE
-        INSERT INTO RELIANT_DWH_SILVER.SILVER_REVIEWS
-        (review_id, store_id, rating, text, review_date, created_at, updated_at)
-    SELECT
-        CAST(NULLIF(TRIM(review_id), '') AS UNSIGNED) AS review_id,
-        CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
-        CAST(NULLIF(TRIM(rating), '') AS SIGNED) AS rating,
-        TRIM(text) AS text,
-        STR_TO_DATE(NULLIF(TRIM(date), ''), '%Y-%m-%d') AS review_date,
-        NOW() AS created_at,
-        NOW() AS updated_at
-        FROM RELIANT_DWH_BRONZE.STG_REVIEWS
-        WHERE is_processed <> TRUE
-            AND loaded_at > v_watermark
-            AND loaded_at <= v_new_watermark
-      AND TRIM(review_id) <> ''
-      AND TRIM(review_id) REGEXP '^[0-9]+$'
-    ON DUPLICATE KEY UPDATE
-        store_id = VALUES(store_id),
-        rating = VALUES(rating),
-        text = VALUES(text),
-        review_date = VALUES(review_date),
-        updated_at = NOW();
+        INSERT INTO RELIANT_DWH_SILVER.SILVER_REVIEWS (
+            review_id,
+            store_id,
+            rating,
+            text,
+            review_date,
+            created_at,
+            updated_at
+        )
+        SELECT *
+        FROM (
+            SELECT
+                CAST(NULLIF(TRIM(review_id), '') AS UNSIGNED) AS review_id,
+                CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
+                CAST(NULLIF(TRIM(rating), '') AS SIGNED) AS rating,
+                TRIM(text) AS text,
+                STR_TO_DATE(NULLIF(TRIM(date), ''), '%Y-%m-%d') AS review_date,
+                NOW() AS created_at,
+                NOW() AS updated_at
+            FROM RELIANT_DWH_BRONZE.STG_REVIEWS
+            WHERE is_processed <> TRUE
+              AND loaded_at > v_watermark
+              AND loaded_at <= v_new_watermark
+              AND TRIM(review_id) <> ''
+              AND TRIM(review_id) REGEXP '^[0-9]+$'
+        ) AS src
+        ON DUPLICATE KEY UPDATE
+            store_id    = src.store_id,
+            rating      = src.rating,
+            text        = src.text,
+            review_date = src.review_date,
+            updated_at  = NOW();
+
 
     SET v_rows_merged = ROW_COUNT();
 

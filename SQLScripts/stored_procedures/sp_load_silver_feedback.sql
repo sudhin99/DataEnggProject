@@ -22,6 +22,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -44,33 +47,49 @@ BEGIN
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'SUCCESS', 'No new records to process');
     ELSE
-        INSERT INTO RELIANT_DWH_SILVER.SILVER_FEEDBACK
-        (feedback_id, customer_id, customer_name, store_id, store_name, rating, comment, channel, feedback_date, created_at, updated_at)
-    SELECT
-        CAST(NULLIF(TRIM(feedback_id), '') AS UNSIGNED) AS feedback_id,
-        CAST(NULLIF(TRIM(customer_id), '') AS UNSIGNED) AS customer_id,
-        NULL AS customer_name,
-        CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
-        NULL AS store_name,
-        CAST(NULLIF(TRIM(rating), '') AS SIGNED) AS rating,
-        TRIM(comment) AS comment,
-        TRIM(channel) AS channel,
-        STR_TO_DATE(NULLIF(TRIM(date), ''), '%Y-%m-%d') AS feedback_date,
-        NOW() AS created_at,
-        NOW() AS updated_at
-        FROM RELIANT_DWH_BRONZE.STG_FEEDBACK
-        WHERE is_processed <> TRUE
-            AND loaded_at > v_watermark
-            AND loaded_at <= v_new_watermark
-      AND TRIM(feedback_id) <> ''
-      AND TRIM(feedback_id) REGEXP '^[0-9]+$'
-    ON DUPLICATE KEY UPDATE
-        customer_id = VALUES(customer_id),
-        rating = VALUES(rating),
-        comment = VALUES(comment),
-        channel = VALUES(channel),
-        feedback_date = VALUES(feedback_date),
-        updated_at = NOW();
+        INSERT INTO RELIANT_DWH_SILVER.SILVER_FEEDBACK (
+            feedback_id,
+            customer_id,
+            customer_name,
+            store_id,
+            store_name,
+            rating,
+            comment,
+            channel,
+            feedback_date,
+            created_at,
+            updated_at
+        )
+        SELECT *
+        FROM (
+            SELECT
+                CAST(NULLIF(TRIM(feedback_id), '') AS UNSIGNED) AS feedback_id,
+                CAST(NULLIF(TRIM(customer_id), '') AS UNSIGNED) AS customer_id,
+                NULL AS customer_name,
+                CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
+                NULL AS store_name,
+                CAST(NULLIF(TRIM(rating), '') AS SIGNED) AS rating,
+                TRIM(comment) AS comment,
+                TRIM(channel) AS channel,
+                STR_TO_DATE(NULLIF(TRIM(date), ''), '%Y-%m-%d') AS feedback_date,
+                NOW() AS created_at,
+                NOW() AS updated_at
+            FROM RELIANT_DWH_BRONZE.STG_FEEDBACK
+            WHERE is_processed <> TRUE
+              AND loaded_at > v_watermark
+              AND loaded_at <= v_new_watermark
+              AND TRIM(feedback_id) <> ''
+              AND TRIM(feedback_id) REGEXP '^[0-9]+$'
+        ) AS src
+        ON DUPLICATE KEY UPDATE
+            customer_id   = src.customer_id,
+            rating        = src.rating,
+            comment       = src.comment,
+            channel       = src.channel,
+            feedback_date = src.feedback_date,
+            updated_at    = NOW();
+
+
 
     SET v_rows_merged = ROW_COUNT();
 

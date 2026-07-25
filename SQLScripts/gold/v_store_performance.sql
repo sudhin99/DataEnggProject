@@ -9,7 +9,11 @@ SELECT
     st.country_name,
     s.store_type,
     s.store_area_sqft,
-    s.store_age_years,
+    TIMESTAMPDIFF(
+        YEAR,
+        STR_TO_DATE(CONCAT(s.open_year, '-01-01'), '%Y-%m-%d'),
+        CURDATE()
+    ) AS store_age_years,
     COUNT(f.order_id)           AS total_orders,
     SUM(f.revenue)              AS total_revenue,
     ROUND(AVG(f.revenue), 2)    AS avg_order_value,
@@ -25,4 +29,4 @@ GROUP BY
     st.country_name, 
     s.store_type, 
     s.store_area_sqft, 
-    s.store_age_years;
+    store_age_years;

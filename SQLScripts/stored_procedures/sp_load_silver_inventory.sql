@@ -22,6 +22,9 @@ BEGIN
         VALUES (v_sp_name, v_layer, v_target_table, v_started_at, NOW(),
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'FAILED', v_error_msg);
+        
+        -- Return the error message to the caller
+        SELECT CONCAT(v_sp_name, ': ERROR - ', v_error_msg) AS result;
     END;
 
     SET v_started_at = NOW();
@@ -44,28 +47,37 @@ BEGIN
             TIMESTAMPDIFF(SECOND, v_started_at, NOW()),
             v_watermark, v_rows_merged, 'SUCCESS', 'No new records to process');
     ELSE
-        INSERT INTO RELIANT_DWH_SILVER.SILVER_INVENTORY
-        (store_id, product_id, quantity, closing_stock, opening_stock, inventory_date, created_at, updated_at)
-    SELECT
-        CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED) AS store_id,
-        CAST(NULLIF(TRIM(product_id), '') AS UNSIGNED) AS product_id,
-        CAST(NULLIF(TRIM(quantity), '') AS SIGNED) AS quantity,
-        CAST(NULLIF(TRIM(closing_stock), '') AS SIGNED) AS closing_stock,
-        CAST(NULLIF(TRIM(opening_stock), '') AS SIGNED) AS opening_stock,
-        STR_TO_DATE(NULLIF(TRIM(inventory_date), ''), '%Y-%m-%d') AS inventory_date,
-        NOW() AS created_at,
-        NOW() AS updated_at
-        FROM RELIANT_DWH_BRONZE.STG_INVENTORY
+       INSERT INTO RELIANT_DWH_SILVER.SILVER_INVENTORY (
+            store_id,
+            product_id,
+            quantity,
+            closing_stock,
+            opening_stock,
+            inventory_date,
+            created_at,
+            updated_at
+        )
+        SELECT
+            CAST(NULLIF(TRIM(store_id), '') AS UNSIGNED)       AS store_id,
+            CAST(NULLIF(TRIM(product_id), '') AS UNSIGNED)     AS product_id,
+            CAST(NULLIF(TRIM(quantity), '') AS SIGNED)         AS quantity,
+            CAST(NULLIF(TRIM(closing_stock), '') AS SIGNED)    AS closing_stock,
+            CAST(NULLIF(TRIM(opening_stock), '') AS SIGNED)    AS opening_stock,
+            STR_TO_DATE(NULLIF(TRIM(inventory_date), ''), '%d/%m/%Y') AS inventory_date,
+            NOW() AS created_at,
+            NOW() AS updated_at
+        FROM RELIANT_DWH_BRONZE.STG_INVENTORY AS src
         WHERE is_processed <> TRUE
-            AND loaded_at > v_watermark
-            AND loaded_at <= v_new_watermark
-      AND TRIM(product_id) <> ''
-      AND TRIM(product_id) REGEXP '^[0-9]+$'
-    ON DUPLICATE KEY UPDATE
-        quantity = VALUES(quantity),
-        closing_stock = VALUES(closing_stock),
-        opening_stock = VALUES(opening_stock),
-        updated_at = NOW();
+          AND loaded_at > v_watermark
+          AND loaded_at <= v_new_watermark
+          AND TRIM(product_id) <> ''
+          AND TRIM(product_id) REGEXP '^[0-9]+$'
+        ON DUPLICATE KEY UPDATE
+            quantity      = src.quantity,
+            closing_stock = src.closing_stock,
+            opening_stock = src.opening_stock,
+            updated_at    = NOW();
+
 
     SET v_rows_merged = ROW_COUNT();
 

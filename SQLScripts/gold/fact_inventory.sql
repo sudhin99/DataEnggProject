@@ -10,6 +10,7 @@ CREATE TABLE FACT_INVENTORY (
     quantity_sold   INT,
     opening_stock   INT,
     closing_stock   INT,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE KEY uk_date_product_store (date_key, product_key, store_key),
     INDEX idx_date_key (date_key),
