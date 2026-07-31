@@ -1,0 +1,8 @@
+order (FACT)              product (DIM)      CUSTOMER(DIM)
+order_id(PK)              product_id(PK)      cust_id(PK)
+order_amount              product details     cust_name
+order_by                  product qty         cust_details 
+order_date                expiry date         cust_added_date
+product_id(FK)            mfg date
+discount
+customer_id(FK)
