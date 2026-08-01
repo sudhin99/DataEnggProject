@@ -37,6 +37,11 @@ def run_mysql_query(**context):
     resolv_ip = _get_wsl_host_from_resolv()
     if resolv_ip and resolv_ip not in candidates:
         candidates.append(resolv_ip)
+    # Add Windows LAN IP fallback (common reachable host from WSL)
+    # If your Windows host IP differs, set MYSQL_HOST env or update this IP.
+    windows_lan_ip = os.environ.get("WINDOWS_HOST") or "192.168.1.8"
+    if windows_lan_ip and windows_lan_ip not in candidates:
+        candidates.append(windows_lan_ip)
     for h in ("localhost", "127.0.0.1"):
         if h not in candidates:
             candidates.append(h)
