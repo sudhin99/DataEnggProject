@@ -1,0 +1,121 @@
+doctor_id,doctor_name,specialization,experience_years,hospital_ids
+D0001,Dr Ritwik Sarkar,General Surgery,33,H101|H106
+D0002,Dr Vikram Shah,Pediatrics,17,H104
+D0003,Dr Pooja Jamir,Endocrinology,18,H104|H106|H111
+D0004,Dr Riya Sarkar,Orthopedics,20,H105
+D0005,Dr Arpita Nair,Urology,28,H109|H114|H115
+D0006,Dr Arindam Jamir,Cardiology,7,H104|H108
+D0007,Dr Sunita Banerjee,Nephrology,23,H102|H104|H106|H108
+D0008,Dr Nikhil Shah,Urology,35,H109
+D0009,Dr Rituparna Iyer,Emergency Medicine,30,H103|H106
+D0010,Dr Kaushik Bhutia,General Medicine,28,H105
+D0011,Dr Neha Singh,Oncology,26,H111|H115
+D0012,Dr Swati Dutta,Nephrology,31,H109
+D0013,Dr Priyanka Menon,Neurology,18,H111|H114
+D0014,Dr Neha Mukherjee,General Surgery,33,H104|H108|H113
+D0015,Dr Bikash Desai,Diabetology,8,H103|H105|H110
+D0016,Dr Rohan Nair,Pediatrics,19,H108|H115
+D0017,Dr Lakshmi Banerjee,Neurology,16,H105|H106|H107|H113
+D0018,Dr Sutapa Sarkar,Endocrinology,30,H103|H110
+D0019,Dr Kavita Banerjee,Gastroenterology,35,H103|H104
+D0020,Dr Debasish Bhutia,Gastroenterology,29,H107|H111
+D0021,Dr Pradeep Bhutia,Neurology,28,H102|H103|H114
+D0022,Dr Ishita Chettri,Oncology,24,H110|H115
+D0023,Dr Pradeep Saha,Critical Care,6,H101|H111|H113
+D0024,Dr Tashi Jamir,Pulmonology,5,H107|H111
+D0025,Dr Sunita Iyer,Orthopedics,33,H102|H107|H114
+D0026,Dr Debjani Sen,Oncology,24,H102|H105|H115
+D0027,Dr Kavita Banerjee,Gastroenterology,23,H102|H109|H110
+D0028,Dr Kaushik Chakraborty,Diabetology,4,H104|H111
+D0029,Dr Debjani Menon,Gynecology,13,H105|H107
+D0030,Dr Ira Verma,Orthopedics,14,H115
+D0031,Dr Riya Lepcha,Neurology,33,H111
+D0032,Dr Nandini Desai,Endocrinology,6,H101|H112|H114
+D0033,Dr Mousumi Bose,Diabetology,30,H108|H110
+D0034,Dr Sunita Bose,Nephrology,4,H104|H106
+D0035,Dr Ira Mehta,Endocrinology,28,H105|H106|H110
+D0036,Dr Ishita Chakraborty,Pediatrics,30,H111|H113
+D0037,Dr Bikash Bhattacharya,Cardiology,10,H101
+D0038,Dr Ira Banerjee,Cardiology,35,H101|H103
+D0039,Dr Anindita Patel,Neurology,20,H101|H110
+D0040,Dr Sutapa Chatterjee,Orthopedics,24,H112
+D0041,Dr Rinchen Mitra,Nephrology,23,H113
+D0042,Dr Anindita Chatterjee,General Medicine,15,H102|H112
+D0043,Dr Arjun Menon,Endocrinology,9,H101|H115
+D0044,Dr Manisha Roy,Diabetology,10,H107|H110|H112|H114
+D0045,Dr Sanjay Chakraborty,Pulmonology,16,H106
+D0046,Dr Sourav Menon,General Surgery,32,H105|H108|H112
+D0047,Dr Bikash Singh,Neurology,7,H103|H109
+D0048,Dr Pradeep Desai,Critical Care,5,H106|H108
+D0049,Dr Sourav Reddy,Pediatrics,28,H102
+D0050,Dr Vikram Chettri,Gastroenterology,20,H111|H113
+D0051,Dr Arpita Mukherjee,Pulmonology,10,H108|H113
+D0052,Dr Anindita Yadav,Pulmonology,30,H112|H115
+D0053,Dr Debjani Patel,Critical Care,4,H102|H105
+D0054,Dr Riya Sen,Nephrology,15,H102|H104
+D0055,Dr Priyanka Bhutia,Critical Care,20,H101|H104
+D0056,Dr Ananya Menon,General Surgery,35,H109|H115
+D0057,Dr Lakshmi Chatterjee,Diabetology,23,H108|H113
+D0058,Dr Atanu Dutta,Emergency Medicine,17,H106|H113
+D0059,Dr Merenla Verma,General Surgery,20,H104
+D0060,Dr Ritwik Chakraborty,Critical Care,28,H102
+D0061,Dr Tashi Saha,Oncology,18,H102|H104|H113
+D0062,Dr Merenla Lepcha,General Surgery,13,H102|H103|H107
+D0063,Dr Niladri Mehta,Critical Care,12,H107|H110|H111
+D0064,Dr Vivek Yadav,Endocrinology,19,H105|H106
+D0065,Dr Atanu Ghosh,Orthopedics,14,H109|H111|H114
+D0066,Dr Pradeep Desai,Neurology,33,H110|H113|H115
+D0067,Dr Pooja Sharma,Orthopedics,25,H105|H110|H115
+D0068,Dr Merenla Mehta,Endocrinology,30,H111|H113
+D0069,Dr Kavita Sen,Emergency Medicine,29,H114
+D0070,Dr Kavita Desai,Orthopedics,29,H101|H102|H108
+D0071,Dr Arjun Chakraborty,Neurology,25,H104|H109|H114|H115
+D0072,Dr Bikash Lepcha,Urology,9,H101|H115
+D0073,Dr Niladri Ghosh,Cardiology,35,H101|H113|H115
+D0074,Dr Niladri Bhutia,Gynecology,33,H103|H115
+D0075,Dr Karthik Nair,Gastroenterology,4,H108
+D0076,Dr Vikram Verma,Gynecology,3,H104|H107
+D0077,Dr Vivek Sarkar,Urology,6,H105|H109|H110|H115
+D0078,Dr Manisha Patel,Pediatrics,35,H101|H106|H111
+D0079,Dr Debasish Jamir,Urology,30,H101|H110
+D0080,Dr Soma Chatterjee,General Medicine,19,H104|H108|H115
+D0081,Dr Abhijit Bhattacharya,Gynecology,7,H101|H110|H111|H114
+D0082,Dr Pooja Singh,Cardiology,22,H104
+D0083,Dr Ananya Chettri,General Medicine,19,H101|H104
+D0084,Dr Merenla Lepcha,Pulmonology,29,H101|H102
+D0085,Dr Pradeep Chakraborty,Oncology,8,H114
+D0086,Dr Priyanka Mehta,Urology,3,H102|H114
+D0087,Dr Rinchen Chatterjee,Diabetology,27,H105|H110
+D0088,Dr Ananya Banerjee,Urology,4,H110|H114
+D0089,Dr Sanjay Verma,Gynecology,29,H105|H114
+D0090,Dr Nikhil Reddy,Orthopedics,6,H102|H103|H104
+D0091,Dr Sunita Ghosh,General Medicine,19,H110
+D0092,Dr Kaushik Bhattacharya,Diabetology,8,H103|H105|H106|H107
+D0093,Dr Karthik Banerjee,Endocrinology,14,H102|H104|H113
+D0094,Dr Arpita Jamir,Critical Care,12,H106|H111
+D0095,Dr Atanu Reddy,General Surgery,14,H106|H110
+D0096,Dr Merenla Nair,Gynecology,30,H102|H108
+D0097,Dr Pradeep Singh,Gynecology,5,H103|H111
+D0098,Dr Nikhil Shah,Pediatrics,15,H108|H112|H115
+D0099,Dr Rahul Singh,General Medicine,17,H103|H105|H111
+D0100,Dr Tashi Roy,Cardiology,3,H105|H107
+D0101,Dr Arjun Bose,Gastroenterology,9,H111|H114
+D0102,Dr Payel Bose,Emergency Medicine,17,H101|H105
+D0103,Dr Payel Jamir,Gastroenterology,8,H101
+D0104,Dr Manisha Chettri,Endocrinology,23,H101|H113
+D0105,Dr Arjun Chatterjee,Endocrinology,4,H103|H109
+D0106,Dr Neha Lepcha,Endocrinology,4,H103|H104|H112|H115
+D0107,Dr Nikhil Sharma,Pulmonology,4,H101|H110
+D0108,Dr Vivek Yadav,Diabetology,29,H107|H111
+D0109,Dr Kaushik Menon,Oncology,12,H103|H108
+D0110,Dr Sourav Roy,Nephrology,30,H105|H107|H111
+D0111,Dr Souvik Jamir,General Medicine,29,H105|H110|H112|H113
+D0112,Dr Swati Chatterjee,Nephrology,20,H106|H111|H114
+D0113,Dr Arjun Verma,Gastroenterology,12,H104|H111|H112
+D0114,Dr Anindita Singh,Pulmonology,28,H110|H113|H114
+D0115,Dr Ira Chakraborty,Gynecology,10,H109|H110|H114|H115
+D0116,Dr Nikhil Roy,Oncology,7,H101|H103|H105|H110
+D0117,Dr Sutapa Chatterjee,Critical Care,33,H109|H113
+D0118,Dr Rinchen Menon,Orthopedics,5,H108|H112|H113
+D0119,Dr Rinchen Sarkar,General Medicine,9,H105|H109
+D0120,Dr Atanu Yadav,Cardiology,21,H101|H102|H106|H113

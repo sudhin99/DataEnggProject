@@ -10,7 +10,7 @@ A healthcare analytics company receives data from a network of private hospitals
 - `doctors.csv`: 120 doctors with `hospital_ids` stored as a pipe-delimited concat field, e.g. `H101|H105`.
 - `hospital_master.xlsx`: 15 private Kolkata/Howrah hospital records and a data dictionary sheet.
 - `admissions_2025_nested.json`: 12,000 admission records for calendar year 2025. Treatments and billing are nested inside each admission record.
-
+- `sample_5_admissions_preview.json`: Small preview file.
 
 ## ETL Expectations
 1. Load raw files into Bronze layer as-is.
