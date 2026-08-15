@@ -1,4 +1,4 @@
-# Kolkata Private Hospital Analytics Platform - Synthetic Dataset 2025
+# Hospital Analytics Platform - Synthetic Dataset 2025
 
 This synthetic dataset is designed for a Data Engineering capstone project using Python, SQL, ETL, and Data Warehouse concepts.
 
