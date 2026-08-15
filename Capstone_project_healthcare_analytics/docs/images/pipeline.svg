@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200">
+  <rect width="100%" height="100%" fill="#fff"/>
+  <g font-family="sans-serif" font-size="13">
+    <rect x="40" y="40" width="140" height="50" rx="6" fill="#eef" stroke="#99c"/>
+    <text x="110" y="70" text-anchor="middle">ingest</text>
+    <rect x="220" y="40" width="140" height="50" rx="6" fill="#efe" stroke="#9c9"/>
+    <text x="290" y="70" text-anchor="middle">bronze load</text>
+    <rect x="400" y="40" width="140" height="50" rx="6" fill="#ffe" stroke="#cc9"/>
+    <text x="470" y="70" text-anchor="middle">silver transform</text>
+    <rect x="580" y="40" width="140" height="50" rx="6" fill="#fef" stroke="#c9c"/>
+    <text x="650" y="70" text-anchor="middle">gold load</text>
+    <line x1="180" y1="65" x2="220" y2="65" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="360" y1="65" x2="400" y2="65" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="540" y1="65" x2="580" y2="65" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333" />
+    </marker>
+  </defs>
+</svg>
