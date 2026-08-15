@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+logs/*.log
+data/source/*.csv
+data/source/*.xlsx
+data/source/*.json
+data/archive/*
+!data/source/.gitkeep
+!data/archive/.gitkeep
+*.pbix
+*.tmp

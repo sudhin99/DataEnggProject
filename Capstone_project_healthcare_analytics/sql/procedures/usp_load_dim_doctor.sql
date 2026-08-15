@@ -1,0 +1,3 @@
+-- Procedure: usp_load_dim_doctor
+-- Objective: Load `dim_doctor` from `silver_doctor`.
+-- Usage: CALL usp_load_dim_doctor();

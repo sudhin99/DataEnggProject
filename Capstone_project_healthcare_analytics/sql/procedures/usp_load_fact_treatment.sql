@@ -1,0 +1,5 @@
+-- -----------------------------------------------------------------------------
+-- Procedure: usp_load_fact_treatment
+-- Objective: Populate `fact_treatment` from `silver_treatment` and link to admissions.
+-- Usage: CALL usp_load_fact_treatment();
+-- -----------------------------------------------------------------------------

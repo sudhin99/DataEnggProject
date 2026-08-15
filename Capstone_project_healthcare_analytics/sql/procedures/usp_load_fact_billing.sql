@@ -1,0 +1,5 @@
+-- -----------------------------------------------------------------------------
+-- Procedure: usp_load_fact_billing
+-- Objective: Populate `fact_billing` from `silver_billing` and link to admissions.
+-- Usage: CALL usp_load_fact_billing();
+-- -----------------------------------------------------------------------------

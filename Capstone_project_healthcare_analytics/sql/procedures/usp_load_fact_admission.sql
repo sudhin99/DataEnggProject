@@ -1,0 +1,5 @@
+-- -----------------------------------------------------------------------------
+-- Procedure: usp_load_fact_admission
+-- Objective: Populate `fact_admission` from `silver_admission` and link to dimensions.
+-- Usage: CALL usp_load_fact_admission();
+-- -----------------------------------------------------------------------------

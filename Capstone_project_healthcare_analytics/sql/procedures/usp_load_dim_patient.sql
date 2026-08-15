@@ -1,0 +1,5 @@
+-- -----------------------------------------------------------------------------
+-- Procedure: usp_load_dim_patient
+-- Objective: Load/refresh `dim_patient` from `silver_patients`.
+-- Usage: CALL usp_load_dim_patient();
+-- -----------------------------------------------------------------------------
