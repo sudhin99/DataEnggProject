@@ -384,6 +384,7 @@ Power BI (.pbix) File
 Dashboard Screenshot
 Summary of Key Insights
 ```
+![Sample Power BI dashboard](SamplePowerBiDashboard.png)
 
 ## Project folder structure
 
