@@ -385,3 +385,54 @@ Power BI (.pbix) File
 Dashboard Screenshot
 Summary of Key Insights
 ```
+
+## Project folder structure
+
+```
+Capstone_project_healthcare_analytics/
+├─ .gitignore
+├─ CapstoneProjectDetails.md
+├─ PowerBiDashboardSample.pdf
+├─ requirements.txt
+├─ data/
+│  ├─ archive/.gitkeep
+│  └─ source/
+│     ├─ .gitkeep
+│     └─ README.md
+├─ python/
+│  ├─ bronze/
+│  │  ├─ load_admissions_bronze.py
+│  │  ├─ load_patients_bronze.py
+│  │  ├─ load_hospitals_bronze.py
+│  │  └─ load_doctors_bronze.py
+│  ├─ silver/
+│  │  ├─ flatten_treatments.py
+│  │  ├─ flatten_billing.py
+│  │  ├─ flatten_admissions.py
+│  │  ├─ transform_hospitals.py
+│  │  ├─ transform_doctors.py
+│  │  └─ transform_patients.py
+│  ├─ gold/
+│  │  └─ load_gold_tables.py
+│  └─ orchestration/
+│     └─ run_pipeline.py
+├─ sql/
+│  ├─ ddl/
+│  │  ├─ bronze_tables.sql
+│  │  ├─ silver_tables.sql
+│  │  └─ gold_tables.sql
+│  ├─ procedures/
+│  │  ├─ usp_load_dim_doctor.sql
+│  │  ├─ usp_load_dim_hospital.sql
+│  │  ├─ usp_load_dim_patient.sql
+│  │  ├─ usp_load_fact_admission.sql
+│  │  ├─ usp_load_fact_billing.sql
+│  │  └─ usp_load_fact_treatment.sql
+│  └─ views/
+│     ├─ vw_age_group_analysis.sql
+│     ├─ vw_disease_hospital_matrix.sql
+│     ├─ vw_disease_trend.sql
+│     ├─ vw_state_analysis.sql
+│     ├─ vw_top_diseases.sql
+│     └─ vw_treatment_cost_analysis.sql
+```
