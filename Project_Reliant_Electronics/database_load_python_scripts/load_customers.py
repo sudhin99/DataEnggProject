@@ -1,7 +1,7 @@
 """
-Load Google reviews data file into MySQL STG_REVIEWS table.
+Load customers data file into MySQL STG_CUSTOMERS table.
 
-Automatically finds files matching pattern: google_reviews_*.json
+Automatically finds files matching pattern: customers*.xlsx or customers*.xls or customers*.csv
 
 Features:
 - Checks FILE_LOAD_LOG to avoid duplicate loads
@@ -9,25 +9,24 @@ Features:
 - Moves files to processed/ or failed/ folders
 
 Usage:
-    python load_google_reviews.py
+    python load_customers.py
 """
 
 import sys
 import os
 import glob
 import shutil
-import json
 import pandas as pd
 from sqlalchemy import create_engine, text
-from config import DATABASE_BRONZE, get_connection_string
+from Project_Reliant_Electronics.database_load_python_scripts.config import DATABASE_BRONZE, get_connection_string
 
-def find_google_reviews_files():
-    """Find all Google reviews files in stg folder."""
+def find_customers_files():
+    """Find all customers files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
-    for pattern in ['google_reviews_*.json']:
+    for pattern in ['customers_*.xlsx', 'customers_*.xls', 'customers_*.csv']:
         all_files.extend(sorted(glob.glob(os.path.join(stg_folder, pattern))))
     return all_files
 
@@ -59,21 +58,21 @@ def log_file_load(conn, file_name, table_name, rows_loaded, status, error_msg=No
     })
     conn.commit()
 
-def load_google_reviews():
-    """Load all Google reviews files into STG_REVIEWS table."""
+def load_customers():
+    """Load all customers files into STG_CUSTOMERS table."""
+    
     # Find all files
-    file_paths = find_google_reviews_files()
+    file_paths = find_customers_files()
     if not file_paths:
-        print("Error: No google reviews files found (google_reviews_*.json)")
+        print("Error: No customers files found (customers_*.xlsx, customers_*.xls, customers_*.csv)")
         sys.exit(1)
         
-    print(f"Found {len(file_paths)} google reviews file(s)")
+    print(f"Found {len(file_paths)} customers file(s)")
     
     # Setup
-    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
+    datasets_folder = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'datasets', 'Reliant_Digitech'))
     processed_folder = os.path.join(datasets_folder, 'processed')
     failed_folder = os.path.join(datasets_folder, 'failed')
-    
     os.makedirs(processed_folder, exist_ok=True)
     os.makedirs(failed_folder, exist_ok=True)
     
@@ -82,20 +81,26 @@ def load_google_reviews():
     
     for file_path in file_paths:
         file_name = os.path.basename(file_path)
-        print(f"\nProcessing: {file_name}")
+        print(f"\nProcessing {file_name}")
         
         # Check if already loaded
         with engine.connect() as conn:
-            if check_if_already_loaded(conn, file_name, 'STG_REVIEWS'):
+            if check_if_already_loaded(conn, file_name, 'STG_CUSTOMERS'):
                 print(f"  ⊗ Skipped: Already loaded successfully")
                 skipped_count += 1
                 continue
                 
         try:
-            # Read JSON file
-            with open(file_path, 'r') as f:
-                data = json.load(f)
-            df = pd.DataFrame(data).astype(str)
+            # Read file
+            file_ext = os.path.splitext(file_path)[1].lower()
+            if file_ext == '.csv':
+                df = pd.read_csv(file_path, dtype=str)
+            elif file_ext in ['.xlsx', '.xls']:
+                df = pd.read_excel(file_path, dtype=str)
+            else:
+                print(f"  ⊗ Skipped: Unsupported file type: {file_ext}")
+                continue
+                
             print(f"  → Read {len(df):,} rows")
             
             # Prepare DataFrame
@@ -103,17 +108,16 @@ def load_google_reviews():
             for col in ['LOADED_AT', 'IS_PROCESSED', 'SOURCE_FILE', 'ROW_HASH']:
                 if col in df.columns:
                     df = df.drop(columns=[col])
-                    
             df['SOURCE_FILE'] = file_name
             df = df.where(pd.notnull(df), None)
             
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
             with engine.begin() as conn:
-                df.to_sql(name='stg_reviews', con=conn, if_exists='append', index=False)
-                log_file_load(conn, file_name, 'STG_REVIEWS', rows, 'SUCCESS')
+                df.to_sql(name='stg_customers', con=conn, if_exists='append', index=False)
+                log_file_load(conn, file_name, 'STG_CUSTOMERS', rows, 'SUCCESS')
                 
-            print(f"  ✓ Successfully loaded {rows:,} rows into STG_REVIEWS")
+            print(f"  ✓ Successfully loaded {rows:,} rows into STG_CUSTOMERS")
             
             shutil.move(file_path, os.path.join(processed_folder, file_name))
             print("  → Moved to processed/")
@@ -122,10 +126,10 @@ def load_google_reviews():
             success_count += 1
             
         except Exception as e:
-            print(f"  X Error: {e}")
+            print(f"  ✗ Error: {e}")
             
             with engine.connect() as conn:
-                log_file_load(conn, file_name, 'STG_REVIEWS', 0, 'FAILED', str(e))
+                log_file_load(conn, file_name, 'STG_CUSTOMERS', 0, 'FAILED', str(e))
                 
             shutil.move(file_path, os.path.join(failed_folder, file_name))
             print("  → Moved to failed/")
@@ -134,14 +138,14 @@ def load_google_reviews():
     engine.dispose()
     
     # Summary
-    print(f"\n{'='*60}")
+    print(f"\n{'-'*60}")
     print("SUMMARY")
-    print(f"{'='*60}")
+    print(f"{'-'*60}")
     print(f"Files processed successfully: {success_count}")
     print(f"Files skipped (already loaded): {skipped_count}")
     print(f"Files failed:                 {failed_count}")
     print(f"Total rows loaded:            {total_rows:,}")
-    print(f"{'='*60}")
+    print(f"{'-'*60}")
 
 if __name__ == '__main__':
-    load_google_reviews()
+    load_customers()

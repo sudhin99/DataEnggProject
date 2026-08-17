@@ -1,7 +1,7 @@
 """
-Load date dimension data file into MySQL STG_DATE_DIM table.
+Load inventory data file into MySQL STG_INVENTORY table.
 
-Automatically finds files matching pattern: date_dim_*.csv
+Automatically finds files matching pattern: inventory_*.csv
 
 Features:
 - Checks FILE_LOAD_LOG to avoid duplicate loads
@@ -9,7 +9,7 @@ Features:
 - Moves files to processed/ or failed/ folders
 
 Usage:
-    python load_date_dim.py
+    python load_inventory.py
 """
 
 import sys
@@ -18,15 +18,17 @@ import glob
 import shutil
 import pandas as pd
 from sqlalchemy import create_engine, text
-from config import DATABASE_BRONZE, get_connection_string
+from Project_Reliant_Electronics.database_load_python_scripts.config import DATABASE_BRONZE, get_connection_string
 
-def find_date_dim_files():
-    """Find the generated date dimension CSV in data_output."""
+def find_inventory_files():
+    """Find all inventory files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_folder = os.path.abspath(os.path.join(script_dir, '..', 'data_output'))
-
-    file_path = os.path.join(output_folder, 'date_dim.csv')
-    return [file_path] if os.path.exists(file_path) else []
+    stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
+    
+    all_files = []
+    for pattern in ['inventory_*.csv']:
+        all_files.extend(sorted(glob.glob(os.path.join(stg_folder, pattern))))
+    return all_files
 
 def check_if_already_loaded(conn, file_name, table_name):
     """Check if file was already loaded successfully."""
@@ -56,21 +58,20 @@ def log_file_load(conn, file_name, table_name, rows_loaded, status, error_msg=No
     })
     conn.commit()
 
-def load_date_dim():
-    """Load all date dimension files into STG_DATE_DIM table."""
+def load_inventory():
+    """Load all inventory files into STG_INVENTORY table."""
     # Find all files
-    file_paths = find_date_dim_files()
+    file_paths = find_inventory_files()
     if not file_paths:
-        print("Error: No date dimension file found (data_output/date_dim.csv)")
+        print("Error: No inventory files found (inventory_*.csv)")
         sys.exit(1)
         
-    print(f"Found {len(file_paths)} date dimension file(s)")
+    print(f"Found {len(file_paths)} inventory file(s)")
     
     # Setup
     datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
-    output_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data_output'))
-    processed_folder = os.path.join(output_folder, 'processed')
-    failed_folder = os.path.join(output_folder, 'failed')
+    processed_folder = os.path.join(datasets_folder, 'processed')
+    failed_folder = os.path.join(datasets_folder, 'failed')
     
     os.makedirs(processed_folder, exist_ok=True)
     os.makedirs(failed_folder, exist_ok=True)
@@ -84,7 +85,7 @@ def load_date_dim():
         
         # Check if already loaded
         with engine.connect() as conn:
-            if check_if_already_loaded(conn, file_name, 'STG_DATE_DIM'):
+            if check_if_already_loaded(conn, file_name, 'STG_INVENTORY'):
                 print(f"  ⊗ Skipped: Already loaded successfully")
                 skipped_count += 1
                 continue
@@ -106,10 +107,10 @@ def load_date_dim():
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
             with engine.begin() as conn:
-                df.to_sql(name='stg_date_dim', con=conn, if_exists='append', index=False)
-                log_file_load(conn, file_name, 'STG_DATE_DIM', rows, 'SUCCESS')
+                df.to_sql(name='stg_inventory', con=conn, if_exists='append', index=False)
+                log_file_load(conn, file_name, 'STG_INVENTORY', rows, 'SUCCESS')
                 
-            print(f"  ✓ Successfully loaded {rows:,} rows into STG_DATE_DIM")
+            print(f"  ✓ Successfully loaded {rows:,} rows into STG_INVENTORY")
             
             shutil.move(file_path, os.path.join(processed_folder, file_name))
             print("  → Moved to processed/")
@@ -121,7 +122,7 @@ def load_date_dim():
             print(f"  X Error: {e}")
             
             with engine.connect() as conn:
-                log_file_load(conn, file_name, 'STG_DATE_DIM', 0, 'FAILED', str(e))
+                log_file_load(conn, file_name, 'STG_INVENTORY', 0, 'FAILED', str(e))
                 
             shutil.move(file_path, os.path.join(failed_folder, file_name))
             print("  → Moved to failed/")
@@ -140,4 +141,5 @@ def load_date_dim():
     print(f"{'='*60}")
 
 if __name__ == '__main__':
-    load_date_dim()
+    load_inventory()
+  

@@ -14,7 +14,7 @@ import glob
 import pandas as pd
 import mysql.connector
 
-from config import DATABASE_BRONZE, MYSQL_CONFIG
+from Project_Reliant_Electronics.database_load_python_scripts.config import DATABASE_BRONZE, MYSQL_CONFIG
 
 
 def find_employee_file():

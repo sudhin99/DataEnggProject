@@ -1,7 +1,7 @@
 """
-Load inventory data file into MySQL STG_INVENTORY table.
+Load Google reviews data file into MySQL STG_REVIEWS table.
 
-Automatically finds files matching pattern: inventory_*.csv
+Automatically finds files matching pattern: google_reviews_*.json
 
 Features:
 - Checks FILE_LOAD_LOG to avoid duplicate loads
@@ -9,24 +9,25 @@ Features:
 - Moves files to processed/ or failed/ folders
 
 Usage:
-    python load_inventory.py
+    python load_google_reviews.py
 """
 
 import sys
 import os
 import glob
 import shutil
+import json
 import pandas as pd
 from sqlalchemy import create_engine, text
-from config import DATABASE_BRONZE, get_connection_string
+from Project_Reliant_Electronics.database_load_python_scripts.config import DATABASE_BRONZE, get_connection_string
 
-def find_inventory_files():
-    """Find all inventory files in stg folder."""
+def find_google_reviews_files():
+    """Find all Google reviews files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
-    for pattern in ['inventory_*.csv']:
+    for pattern in ['google_reviews_*.json']:
         all_files.extend(sorted(glob.glob(os.path.join(stg_folder, pattern))))
     return all_files
 
@@ -58,15 +59,15 @@ def log_file_load(conn, file_name, table_name, rows_loaded, status, error_msg=No
     })
     conn.commit()
 
-def load_inventory():
-    """Load all inventory files into STG_INVENTORY table."""
+def load_google_reviews():
+    """Load all Google reviews files into STG_REVIEWS table."""
     # Find all files
-    file_paths = find_inventory_files()
+    file_paths = find_google_reviews_files()
     if not file_paths:
-        print("Error: No inventory files found (inventory_*.csv)")
+        print("Error: No google reviews files found (google_reviews_*.json)")
         sys.exit(1)
         
-    print(f"Found {len(file_paths)} inventory file(s)")
+    print(f"Found {len(file_paths)} google reviews file(s)")
     
     # Setup
     datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
@@ -85,14 +86,16 @@ def load_inventory():
         
         # Check if already loaded
         with engine.connect() as conn:
-            if check_if_already_loaded(conn, file_name, 'STG_INVENTORY'):
+            if check_if_already_loaded(conn, file_name, 'STG_REVIEWS'):
                 print(f"  ⊗ Skipped: Already loaded successfully")
                 skipped_count += 1
                 continue
                 
         try:
-            # Read file
-            df = pd.read_csv(file_path, dtype=str)
+            # Read JSON file
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+            df = pd.DataFrame(data).astype(str)
             print(f"  → Read {len(df):,} rows")
             
             # Prepare DataFrame
@@ -107,10 +110,10 @@ def load_inventory():
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
             with engine.begin() as conn:
-                df.to_sql(name='stg_inventory', con=conn, if_exists='append', index=False)
-                log_file_load(conn, file_name, 'STG_INVENTORY', rows, 'SUCCESS')
+                df.to_sql(name='stg_reviews', con=conn, if_exists='append', index=False)
+                log_file_load(conn, file_name, 'STG_REVIEWS', rows, 'SUCCESS')
                 
-            print(f"  ✓ Successfully loaded {rows:,} rows into STG_INVENTORY")
+            print(f"  ✓ Successfully loaded {rows:,} rows into STG_REVIEWS")
             
             shutil.move(file_path, os.path.join(processed_folder, file_name))
             print("  → Moved to processed/")
@@ -122,7 +125,7 @@ def load_inventory():
             print(f"  X Error: {e}")
             
             with engine.connect() as conn:
-                log_file_load(conn, file_name, 'STG_INVENTORY', 0, 'FAILED', str(e))
+                log_file_load(conn, file_name, 'STG_REVIEWS', 0, 'FAILED', str(e))
                 
             shutil.move(file_path, os.path.join(failed_folder, file_name))
             print("  → Moved to failed/")
@@ -141,5 +144,4 @@ def load_inventory():
     print(f"{'='*60}")
 
 if __name__ == '__main__':
-    load_inventory()
-  
+    load_google_reviews()

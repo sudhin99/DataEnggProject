@@ -1,7 +1,7 @@
 """
-Load customer feedback data file into MySQL STG_FEEDBACK table.
+Load orders data file into MySQL STG_ORDERS table.
 
-Automatically finds files matching pattern: customer_feedback_*.csv
+Automatically finds files matching pattern: orders_*.csv
 
 Features:
 - Checks FILE_LOAD_LOG to avoid duplicate loads
@@ -9,7 +9,7 @@ Features:
 - Moves files to processed/ or failed/ folders
 
 Usage:
-    python load_feedback.py
+    python load_orders.py
 """
 
 import sys
@@ -18,22 +18,22 @@ import glob
 import shutil
 import pandas as pd
 from sqlalchemy import create_engine, text
-from config import DATABASE_BRONZE, get_connection_string
+from Project_Reliant_Electronics.database_load_python_scripts.config import DATABASE_BRONZE, get_connection_string
 
-def find_feedback_files():
-    """Find all feedback files in stg folder."""
+def find_orders_files():
+    """Find all orders files in stg folder."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     stg_folder = os.path.abspath(os.path.join(script_dir, '..', 'datasets', 'Reliant_Digitech', 'stg'))
     
     all_files = []
-    for pattern in ['customer_feedback_*.csv']:
+    for pattern in ['orders_*.csv']:
         all_files.extend(sorted(glob.glob(os.path.join(stg_folder, pattern))))
     return all_files
 
 def check_if_already_loaded(conn, file_name, table_name):
     """Check if file was already loaded successfully."""
     query = text("""
-        SELECT COUNT(1)
+                SELECT COUNT(1)
         FROM FILE_LOAD_LOG
         WHERE file_name = :file_name
           AND table_name = :table_name
@@ -58,15 +58,15 @@ def log_file_load(conn, file_name, table_name, rows_loaded, status, error_msg=No
     })
     conn.commit()
 
-def load_feedback():
-    """Load all feedback files into STG_FEEDBACK table."""
+def load_orders():
+    """Load all orders files into STG_ORDERS table."""
     # Find all files
-    file_paths = find_feedback_files()
+    file_paths = find_orders_files()
     if not file_paths:
-        print("Error: No feedback files found (customer_feedback_*.csv)")
+        print("Error: No orders files found (orders_*.csv)")
         sys.exit(1)
         
-    print(f"Found {len(file_paths)} feedback file(s)")
+    print(f"Found {len(file_paths)} orders file(s)")
     
     # Setup
     datasets_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'datasets', 'Reliant_Digitech'))
@@ -85,7 +85,7 @@ def load_feedback():
         
         # Check if already loaded
         with engine.connect() as conn:
-            if check_if_already_loaded(conn, file_name, 'STG_FEEDBACK'):
+            if check_if_already_loaded(conn, file_name, 'STG_ORDERS'):
                 print(f"  ⊗ Skipped: Already loaded successfully")
                 skipped_count += 1
                 continue
@@ -107,10 +107,10 @@ def load_feedback():
             # Load to MySQL (all-or-nothing with transaction)
             rows = len(df)
             with engine.begin() as conn:
-                df.to_sql(name='STG_FEEDBACK', con=conn, if_exists='append', index=False)
-                log_file_load(conn, file_name, 'STG_FEEDBACK', rows, 'SUCCESS')
+                df.to_sql(name='stg_orders', con=conn, if_exists='append', index=False)
+                log_file_load(conn, file_name, 'STG_ORDERS', rows, 'SUCCESS')
                 
-            print(f"  ✓ Successfully loaded {rows:,} rows into STG_FEEDBACK")
+            print(f"  ✓ Successfully loaded {rows:,} rows into STG_ORDERS")
             
             shutil.move(file_path, os.path.join(processed_folder, file_name))
             print("  → Moved to processed/")
@@ -122,7 +122,7 @@ def load_feedback():
             print(f"  X Error: {e}")
             
             with engine.connect() as conn:
-                log_file_load(conn, file_name, 'STG_FEEDBACK', 0, 'FAILED', str(e))
+                log_file_load(conn, file_name, 'STG_ORDERS', 0, 'FAILED', str(e))
                 
             shutil.move(file_path, os.path.join(failed_folder, file_name))
             print("  → Moved to failed/")
@@ -137,8 +137,9 @@ def load_feedback():
     print(f"Files processed successfully: {success_count}")
     print(f"Files skipped (already loaded): {skipped_count}")
     print(f"Files failed:                 {failed_count}")
+    # Following the pattern from the other scripts to cleanly wrap up execution metrics
     print(f"Total rows loaded:            {total_rows:,}")
     print(f"{'='*60}")
 
 if __name__ == '__main__':
-    load_feedback()
+    load_orders()
