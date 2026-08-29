@@ -13,7 +13,7 @@ default_args = {
 with DAG(
  dag_id='send_email_example',
  default_args=default_args,
- schedule=None, # Run manually
+ schedule=None, # Run manually * 2 * 30 *
  catchup=False
 ) as dag:
 

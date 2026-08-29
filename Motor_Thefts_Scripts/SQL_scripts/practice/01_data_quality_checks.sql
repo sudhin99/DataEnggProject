@@ -1,4 +1,4 @@
-USE motot_theaft;
+USE motor_theaft;
 
 -- Practice use case: identify incomplete or inconsistent records in the motor theft dataset
 SELECT

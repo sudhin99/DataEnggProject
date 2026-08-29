@@ -1,4 +1,4 @@
-USE motot_theaft;
+USE motor_theaft;
 
 INSERT INTO locations (location_id, region, country, population, density) VALUES
 (101, 'Northland', 'New Zealand', 201500, 16.11),

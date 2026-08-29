@@ -14,7 +14,7 @@ with DAG(
     dag_id=DAG_ID,
     description="DAG to execute a SQL file using mysql",
     start_date=days_ago(1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False,
     tags=["sql", "mysql"],
 ) as dag:

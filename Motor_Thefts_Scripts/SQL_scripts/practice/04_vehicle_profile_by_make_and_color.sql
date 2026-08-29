@@ -1,4 +1,4 @@
-USE motot_theaft;
+USE motor_theaft;
 
 -- Practice use case: understand theft patterns by make, vehicle type, and color
 SELECT

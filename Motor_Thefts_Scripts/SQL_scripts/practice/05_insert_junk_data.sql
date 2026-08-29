@@ -1,4 +1,4 @@
-USE motot_theaft;
+USE motor_theaft;
 
 -- Practice use case: insert intentionally messy rows to trigger data-quality and anomaly checks
 INSERT IGNORE INTO locations (location_id, region, country, population, density)

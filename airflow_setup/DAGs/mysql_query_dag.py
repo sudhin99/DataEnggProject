@@ -104,7 +104,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='mysql_query_dag',
+    dag_id='NEW_SQL_DAG',
     default_args=default_args,
     description='Run MySQL queries using MySqlHook and PythonOperator',
     start_date=datetime(2024, 1, 1),

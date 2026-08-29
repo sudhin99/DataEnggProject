@@ -1,4 +1,4 @@
-USE motot_theaft;
+USE motor_theaft;
 
 -- Practice use case: find duplicate make names that may need cleanup
 SELECT

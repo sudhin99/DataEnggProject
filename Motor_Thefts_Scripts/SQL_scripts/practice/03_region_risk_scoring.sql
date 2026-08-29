@@ -1,4 +1,4 @@
-USE motot_theaft;
+USE motor_theaft;
 
 -- Practice use case: rank regions by theft intensity relative to population size
 SELECT

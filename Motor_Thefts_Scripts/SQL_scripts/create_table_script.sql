@@ -1,5 +1,5 @@
 
-use motot_theaft;
+use mototheaft;
 CREATE TABLE IF NOT EXISTS locations (
         location_id INT PRIMARY KEY, 
         region VARCHAR(200), 
